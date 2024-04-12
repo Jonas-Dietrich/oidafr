@@ -1,10 +1,23 @@
- import { useState } from 'react'
+ import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+ import supabase from "./utils/supabase.tsx";
 
 function App() {
   const [count, setCount] = useState(0)
+
+    const [todos, setTodos] = useState<object[]>([]);
+
+    useEffect(() => {
+        updateTodos()
+    }, []);
+    
+    const updateTodos = async () => {
+        const { data, error} = await supabase.from('todo').select();
+        if (data) setTodos(data);
+        if (error) console.log(error.message)
+    }
 
   return (
     <>
@@ -28,6 +41,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+        <div>{todos.map((todo, idx) => <p key={idx}>{JSON.stringify(todo)}</p>)}</div>
     </>
   )
 }
