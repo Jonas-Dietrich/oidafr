@@ -5,6 +5,7 @@ import supabase from "./utils/supabase.tsx";
 import AccountManagement from "./views/AccountManagement.tsx";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Home from "./views/Home.tsx";
+import PasswordReset from "./views/PasswordReset.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -44,6 +45,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/account" element={<AccountManagement />} />
+                    <Route path="/account-recovery" element={<PasswordReset />} />
                 </Routes>
             </BrowserRouter>
         )
