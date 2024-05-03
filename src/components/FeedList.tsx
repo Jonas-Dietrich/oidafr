@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import supabase from "@/utils/supabase.tsx";
-import {data} from "autoprefixer";
 
 const FeedList = () => {
     const [feeds, setFeeds] = useState<string[]>([]);
@@ -12,7 +11,7 @@ const FeedList = () => {
             .select('feedUrl')
 
         if (error) setErrorMsg(error.message)
-        if (data && data != null) setFeeds(user_feeds.map(d => d.feedUrl));
+        if (user_feeds) setFeeds(user_feeds.map(d => d.feedUrl));
 
 
     }
