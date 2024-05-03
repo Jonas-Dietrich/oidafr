@@ -53,9 +53,7 @@ const ResetPassword = () => {
                        placeholder="New Password" className="border rounded-lg px-3 py-2 mb-2 w-full"/>
                 <input type="password" value={confirmNewPassword} onChange={e => setConfirmNewPassword(e.target.value)}
                        placeholder="Confirm New Password" className="border rounded-lg px-3 py-2 mb-2 w-full"/>
-                <button onClick={handlePasswordChange} className="bg-blue-500 text-white px-4 py-2 rounded-lg">Passwort
-                    zurücksetzen
-                </button>
+                <button onClick={handlePasswordChange} className="bg-blue-500 text-white px-4 py-2 rounded-lg">Reset password</button>
                 {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
                 {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
             </div>
