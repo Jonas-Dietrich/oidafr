@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     const handlePasswordChange = async () => {
         if (newPassword && newPassword === confirmNewPassword) {
-            let { data, error } = await supabase.auth.updateUser({ password: newPassword });
+            const { data, error } = await supabase.auth.updateUser({ password: newPassword });
             if (error) {
                 console.error(error);
                 setErrorMessage(error.message);
