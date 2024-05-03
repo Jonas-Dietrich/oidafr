@@ -9,6 +9,236 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      rss_category: {
+        Row: {
+          category_id: number
+          category_name: string | null
+          domain: string | null
+        }
+        Insert: {
+          category_id: number
+          category_name?: string | null
+          domain?: string | null
+        }
+        Update: {
+          category_id?: number
+          category_name?: string | null
+          domain?: string | null
+        }
+        Relationships: []
+      }
+      rss_channel: {
+        Row: {
+          category_category_id: number | null
+          channel_id: number
+          copyright: string | null
+          description: string | null
+          docs: string | null
+          feed_url: string | null
+          generator: string | null
+          language: string | null
+          last_build_date: string | null
+          link: string | null
+          managing_editor: string | null
+          rating: string | null
+          rss_image_image_id: number | null
+          title: string | null
+          web_master: string | null
+        }
+        Insert: {
+          category_category_id?: number | null
+          channel_id: number
+          copyright?: string | null
+          description?: string | null
+          docs?: string | null
+          feed_url?: string | null
+          generator?: string | null
+          language?: string | null
+          last_build_date?: string | null
+          link?: string | null
+          managing_editor?: string | null
+          rating?: string | null
+          rss_image_image_id?: number | null
+          title?: string | null
+          web_master?: string | null
+        }
+        Update: {
+          category_category_id?: number | null
+          channel_id?: number
+          copyright?: string | null
+          description?: string | null
+          docs?: string | null
+          feed_url?: string | null
+          generator?: string | null
+          language?: string | null
+          last_build_date?: string | null
+          link?: string | null
+          managing_editor?: string | null
+          rating?: string | null
+          rss_image_image_id?: number | null
+          title?: string | null
+          web_master?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fkhrqg4g1lwbotjoymh1f5v51cv"
+            columns: ["category_category_id"]
+            isOneToOne: false
+            referencedRelation: "rss_category"
+            referencedColumns: ["category_id"]
+          },
+          {
+            foreignKeyName: "fkyfbuaovpr3aeciqk4lxl7ww5"
+            columns: ["rss_image_image_id"]
+            isOneToOne: true
+            referencedRelation: "rss_image"
+            referencedColumns: ["image_id"]
+          },
+        ]
+      }
+      rss_enclosureurl: {
+        Row: {
+          length: string | null
+          type: string | null
+          url: string | null
+          url_id: number
+        }
+        Insert: {
+          length?: string | null
+          type?: string | null
+          url?: string | null
+          url_id: number
+        }
+        Update: {
+          length?: string | null
+          type?: string | null
+          url?: string | null
+          url_id?: number
+        }
+        Relationships: []
+      }
+      rss_image: {
+        Row: {
+          description: string | null
+          height: number | null
+          image_id: number
+          link: string | null
+          title: string | null
+          url: string | null
+          width: number | null
+        }
+        Insert: {
+          description?: string | null
+          height?: number | null
+          image_id: number
+          link?: string | null
+          title?: string | null
+          url?: string | null
+          width?: number | null
+        }
+        Update: {
+          description?: string | null
+          height?: number | null
+          image_id?: number
+          link?: string | null
+          title?: string | null
+          url?: string | null
+          width?: number | null
+        }
+        Relationships: []
+      }
+      rss_item: {
+        Row: {
+          author: string | null
+          category_category_id: number | null
+          comments: string | null
+          description: string | null
+          enclosureurl_url_id: number | null
+          guid: string | null
+          item_id: number
+          link: string | null
+          pub_date: string | null
+          rss_channel_channel_id: number | null
+          source_source_id: number | null
+          title: string | null
+        }
+        Insert: {
+          author?: string | null
+          category_category_id?: number | null
+          comments?: string | null
+          description?: string | null
+          enclosureurl_url_id?: number | null
+          guid?: string | null
+          item_id: number
+          link?: string | null
+          pub_date?: string | null
+          rss_channel_channel_id?: number | null
+          source_source_id?: number | null
+          title?: string | null
+        }
+        Update: {
+          author?: string | null
+          category_category_id?: number | null
+          comments?: string | null
+          description?: string | null
+          enclosureurl_url_id?: number | null
+          guid?: string | null
+          item_id?: number
+          link?: string | null
+          pub_date?: string | null
+          rss_channel_channel_id?: number | null
+          source_source_id?: number | null
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk2tox6bbwh6fcs2h2fkgu7xkej"
+            columns: ["rss_channel_channel_id"]
+            isOneToOne: false
+            referencedRelation: "rss_channel"
+            referencedColumns: ["channel_id"]
+          },
+          {
+            foreignKeyName: "fk6jvu1j2gotwwpdk4qmemwphxg"
+            columns: ["enclosureurl_url_id"]
+            isOneToOne: true
+            referencedRelation: "rss_enclosureurl"
+            referencedColumns: ["url_id"]
+          },
+          {
+            foreignKeyName: "fkj430ues5q5ihpijgc584jt40o"
+            columns: ["source_source_id"]
+            isOneToOne: false
+            referencedRelation: "rss_source"
+            referencedColumns: ["source_id"]
+          },
+          {
+            foreignKeyName: "fkn6vdw4daddkckbivrqmfonb3x"
+            columns: ["category_category_id"]
+            isOneToOne: false
+            referencedRelation: "rss_category"
+            referencedColumns: ["category_id"]
+          },
+        ]
+      }
+      rss_source: {
+        Row: {
+          source_id: number
+          source_name: string | null
+          url: string | null
+        }
+        Insert: {
+          source_id: number
+          source_name?: string | null
+          url?: string | null
+        }
+        Update: {
+          source_id?: number
+          source_name?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       todo: {
         Row: {
           description: string | null
@@ -35,7 +265,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      change_user_password: {
+        Args: {
+          current_plain_password: string
+          new_plain_password: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never

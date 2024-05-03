@@ -2,6 +2,9 @@ import {useEffect, useState} from 'react'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import supabase from "./utils/supabase.tsx";
+import AccountManagement from "./views/AccountManagement.tsx";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import Home from "./views/Home.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -32,13 +35,19 @@ function App() {
         )
     } else {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-5">
-                <img src="/rss-41072_1280.png" alt="RSS Icon" className="w-32 h-32 mb-10"/>
-                <p className="text-xl text-gray-700">Logged in!</p>
-                <button onClick={() => supabase.auth.signOut()} className="px-4 py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-600">Sign out</button>
-            </div>
+            <BrowserRouter>
+                <nav>
+                    <Link to="/">Home</Link>
+                    <Link to="/account">My account</Link>
+                    <button className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"} onClick={() => supabase.auth.signOut()}>Sign off</button>
+                </nav>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/account" element={<AccountManagement />} />
+                </Routes>
+            </BrowserRouter>
         )
     }
 }
 
-export default App
+export default App;
