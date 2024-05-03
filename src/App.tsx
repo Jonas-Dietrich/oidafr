@@ -6,6 +6,8 @@ import AccountManagement from "./views/AccountManagement.tsx";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Home from "./views/Home.tsx";
 import PasswordReset from "./views/PasswordReset.tsx";
+import "./App.css"
+import MyFeeds from "@/views/MyFeeds.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -40,11 +42,13 @@ function App() {
                 <nav>
                     <Link to="/">Home</Link>
                     <Link to="/account">My account</Link>
+                    <Link to="/my-feeds">My feeds</Link>
                     <button className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"} onClick={() => supabase.auth.signOut()}>Sign off</button>
                 </nav>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/account" element={<AccountManagement />} />
+                    <Route path="/my-feeds" element={<MyFeeds/>}/>
                     <Route path="/account-recovery" element={<PasswordReset />} />
                 </Routes>
             </BrowserRouter>

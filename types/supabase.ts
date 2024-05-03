@@ -260,6 +260,38 @@ export type Database = {
         }
         Relationships: []
       }
+      user_feeds: {
+        Row: {
+          created_at: string
+          feedUrl: string
+          invalid_since: string | null
+          is_favorite: boolean
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          feedUrl: string
+          invalid_since?: string | null
+          is_favorite?: boolean
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          feedUrl?: string
+          invalid_since?: string | null
+          is_favorite?: boolean
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_feeds_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
