@@ -6,6 +6,7 @@ import AccountManagement from "./views/AccountManagement.tsx";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Home from "./views/Home.tsx";
 import PasswordReset from "./views/PasswordReset.tsx";
+import "./App.css"
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
