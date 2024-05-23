@@ -8,7 +8,7 @@ const MyArticles = () => {
 
     useEffect(() => {
         fetchUserArticles().then(setArticles);
-    });
+    }, []);
 
     return (
         <div>
