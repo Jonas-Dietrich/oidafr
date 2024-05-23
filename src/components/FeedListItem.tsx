@@ -8,11 +8,15 @@ const FeedListItem:React.FC<FeedListItemProps> = ({feed}) => {
         border: '1px solid red',
     }
 
-    return (<div key={feed.channel_id} style={styles}>
-            <h3>{feed.title}</h3>
-            <h4>{feed.description}</h4>
-            {feed.rssImage == null ? <></> : <img src={feed.rssImage.url} width={feed.rssImage.width} height={feed.rssImage.height}></img>}
-        </div>);
+    return (<div key={feed.channel_id} style={styles} className="max-w-m p-5 m-4 flex flex-row rounded-lg">
+        <div className="mr-4">
+            {feed.rssImage == null ? <></> : <img src={feed.rssImage.url} width={feed.rssImage.width} height={feed.rssImage.height} className="rounded"></img>}
+        </div>
+        <div>
+            <h3 className="text-xl font-semibold">{feed.title}</h3>
+            <h4 className="text-lg">{feed.description}</h4>
+        </div>
+    </div>);
 }
  
 export default FeedListItem;
