@@ -3,12 +3,11 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import supabase from "./utils/supabase.tsx";
 import AccountManagement from "./views/AccountManagement.tsx";
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./views/Home.tsx";
 import PasswordReset from "./views/PasswordReset.tsx";
 import "./App.css"
 import MyFeeds from "@/views/MyFeeds.tsx";
-import ArticleList from './components/ArticleList.tsx';
 import MyArticles from './views/MyArticles.tsx';
 import Header from './components/Header.tsx';
 
