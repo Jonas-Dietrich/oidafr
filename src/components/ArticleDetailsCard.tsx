@@ -20,6 +20,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
+import rssImage from '../assets/rssWarning.png';
 
 interface ArticleDetailsCardProps {
     rssItem: RssItem
@@ -72,15 +73,24 @@ const ArticleDetailsCard:React.FC<ArticleDetailsCardProps> = ({rssItem}) => {
             <AlertDialog open={openAlertDialog} onOpenChange={setOpenAlertDialog}>
                 <AlertDialogTrigger>Open</AlertDialogTrigger>
                 <AlertDialogContent>
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <img src={rssImage} alt="Our careful mascot - always taking care of her users"
+                             content={"Content credentials: Generated with AI ∙ 24 May 2024 at 10:11 pm"}
+                             className="size-40"/>
+                    </div>
+
                     <AlertDialogHeader>
-                        <AlertDialogTitle>You are about to leave this page and visit an external website.</AlertDialogTitle>
+                        <AlertDialogTitle>You are about to leave this page and visit an external
+                            website.</AlertDialogTitle>
                         <AlertDialogDescription>
-                            Are you sure you want to continue? Do you trust <span className={"text-red-700"}>{rssItem?.link}</span>? Hackers might steal your data!
+                            Are you sure you want to continue? Do you trust <span
+                            className={"text-red-700"}>{rssItem?.link}</span>? Hackers might steal your data!
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogAction>Cancel</AlertDialogAction>
-                        <AlertDialogCancel onClick={() => window.open(rssItem?.link, '_blank')}>Continue to external page</AlertDialogCancel>
+                        <AlertDialogCancel onClick={() => window.open(rssItem?.link, '_blank')}>Continue to external
+                            page</AlertDialogCancel>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
