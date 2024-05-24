@@ -10,6 +10,7 @@ import "./App.css"
 import MyFeeds from "@/views/MyFeeds.tsx";
 import MyArticles from './views/MyArticles.tsx';
 import Header from './components/Header.tsx';
+import CreateComment from "@/views/CreateComment.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/my-feeds" element={<MyFeeds/>}/>
                     <Route path="/my-articles" element={<MyArticles/>} />
                     <Route path="/account-recovery" element={<PasswordReset />} />
+                    <Route path="/comments/create" element={<CreateComment />} />
                 </Routes>
             </BrowserRouter>
         )
