@@ -21,7 +21,7 @@ const ArticleDetails = () => {
 
     useEffect(() => {
         fetchArticle().then(() => console.log("fetchArticle executed"));
-    }, []);
+    }, [item_id]);
 
     return (
         <div>
