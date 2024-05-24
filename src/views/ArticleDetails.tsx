@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {getItemById} from "@/utils/requestHelper.ts";
 import RssItemItem from "@/components/RssItemItem.tsx";
 import FeedListItem from "@/components/FeedListItem.tsx";
@@ -14,30 +14,30 @@ const ArticleDetails = () => {
 
     const {toast} = useToast();
 
-    useEffect(() => {
-        const fetchArticle = async () => {
-            if (item_id && !isNaN(+item_id)) {
-                getItemById(+item_id).then(r => setItem(r.data)).catch(e => {
-                    toast({
-                        variant: "destructive",
-                        title: `The requested item with id ${item_id} was not found.`,
-                        description: "Please provide a valid item id.",
-                    })
-                    setHttpStatus(e.response.status)
-                });
-            } else {
+    const fetchArticle = useCallback(async () => {
+        if (item_id && !isNaN(+item_id)) {
+            getItemById(+item_id).then(r => setItem(r.data)).catch(e => {
                 toast({
                     variant: "destructive",
-                    title: `The id of the requested item (${item_id}) is not a number`,
+                    title: `The requested item with id ${item_id} was not found.`,
                     description: "Please provide a valid item id.",
                 })
-                console.log("inv")
-                setHttpStatus(404)
-            }
+                setHttpStatus(e.response.status)
+            });
+        } else {
+            toast({
+                variant: "destructive",
+                title: `The id of the requested item (${item_id}) is not a number`,
+                description: "Please provide a valid item id.",
+            })
+            console.log("inv")
+            setHttpStatus(404)
         }
-
-        fetchArticle().then(() => console.log("fetchArticle executed"));
     }, [item_id]);
+
+    useEffect(() => {
+        fetchArticle().then(() => console.log("fetchArticle executed"));
+    }, [fetchArticle]);
 
     return (
         <div>
