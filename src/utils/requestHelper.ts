@@ -41,3 +41,12 @@ export const fetchUserArticles = async ():Promise<RssItem[]> => {
         
     return data
 }
+
+export const postUserComment = async (title: string, link: string, description: string, author: string) => {
+    return  await axios.post(`${beUrl}/comments`, {
+        title,
+        link,
+        description,
+        author,
+    });
+}
