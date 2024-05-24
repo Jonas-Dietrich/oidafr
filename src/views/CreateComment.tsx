@@ -28,7 +28,7 @@ const CreateComment = () => {
             return;
         }
 
-        const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+        const urlRegex = /^(ftp|http|https):\/\/[^ "]+\.\w{2,}$/;
         if (!urlRegex.test(link)) {
             console.log("Please enter a valid URL");
             toastError("Please enter a valid URL", "URL must start with http:// or https:// and not contain spaces")
