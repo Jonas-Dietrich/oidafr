@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import {useToast} from "@/components/ui/use-toast"
 
 const CreateComment = () => {
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');
     const [description, setDescription] = useState('');
+
+    const {toast} = useToast();
 
     const descriptionLength: number = 50;
 
@@ -12,6 +15,7 @@ const CreateComment = () => {
 
         if (!title) {
             console.log("Title is required");
+            toastError("Title is required", "Please enter a title")
             return;
         }
 
@@ -19,17 +23,30 @@ const CreateComment = () => {
         const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
         if (!urlRegex.test(link)) {
             console.log("Please enter a valid URL");
+            toastError("Please enter a valid URL", "URL must start with http:// or https:// and not contain spaces")
             return;
         }
 
         if (description.length <= descriptionLength) {
             console.log(`Description must be longer than ${descriptionLength} characters`);
+            toastError(`Description must be longer than ${descriptionLength} characters`, description.length === 0 ?  "Please enter a description" : "Please enter a longer description")
             return;
         }
 
-        // Handle form submission here
+        toast({
+            title: "Comment submitted",
+            description: "Your comment has been submitted successfully",
+        })
         console.log({ title, link, description });
     };
+    
+    const toastError = (title: string, description: string) => {
+        toast({
+            variant: "destructive",
+            title: title,
+            description: description,
+        })
+    }
 
     return (
         <div className="bg-blue-50 p-10 flex justify-center pt-10">

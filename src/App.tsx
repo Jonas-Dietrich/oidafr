@@ -11,6 +11,7 @@ import MyFeeds from "@/views/MyFeeds.tsx";
 import MyArticles from './views/MyArticles.tsx';
 import Header from './components/Header.tsx';
 import CreateComment from "@/views/CreateComment.tsx";
+import {Toaster} from "@/components/ui/toaster.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -51,6 +52,7 @@ function App() {
                     <Route path="/account-recovery" element={<PasswordReset />} />
                     <Route path="/comments/create" element={<CreateComment />} />
                 </Routes>
+                <Toaster/>
             </BrowserRouter>
         )
     }
