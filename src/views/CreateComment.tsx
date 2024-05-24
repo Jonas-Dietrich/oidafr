@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {useToast} from "@/components/ui/use-toast"
+import {postUserComment} from "@/utils/requestHelper.ts";
 
 const CreateComment = () => {
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');
     const [description, setDescription] = useState('');
+    const [author, setAuthor] = useState('');
+    const [commentSubmitted, setCommentSubmitted] = useState(false);
 
     const {toast} = useToast();
 
@@ -13,13 +16,18 @@ const CreateComment = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!author) {
+            console.log("Author is required");
+            toastError("Author is required", "Please enter an author")
+            return;
+        }
+
         if (!title) {
             console.log("Title is required");
             toastError("Title is required", "Please enter a title")
             return;
         }
 
-        // Validate URL with regex
         const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
         if (!urlRegex.test(link)) {
             console.log("Please enter a valid URL");
@@ -33,13 +41,22 @@ const CreateComment = () => {
             return;
         }
 
-        toast({
-            title: "Comment submitted",
-            description: "Your comment has been submitted successfully",
+        postUserComment(title, link, description, author).then(data => {
+            if (data) {
+                setCommentSubmitted(true);
+                toast({
+                    title: "Comment submitted",
+                    description: "Your comment has been submitted successfully",
+                })
+            }
+            else {
+                toastError("Error submitting comment", "An unexpected error occurred while submitting your comment. Please try again later.");
+            }
         })
+
         console.log({ title, link, description });
     };
-    
+
     const toastError = (title: string, description: string) => {
         toast({
             variant: "destructive",
@@ -48,11 +65,29 @@ const CreateComment = () => {
         })
     }
 
+    useEffect(() => {
+        if (commentSubmitted === false) {
+            setTitle('');
+            setLink('');
+            setDescription('');
+            setAuthor('');
+        }
+    }, [commentSubmitted]);
+
     return (
         <div className="bg-blue-50 p-10 flex justify-center pt-10">
             <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
                 <h1 className="text-2xl font-bold text-blue-500 mb-6">Write and leave your own Comment</h1>
                 <form onSubmit={handleSubmit}>
+                    <label className="block mb-4">
+                        <span className="text-gray-700">Author:</span>
+                        <input
+                            type="text"
+                            value={author}
+                            onChange={e => setAuthor(e.target.value)}
+                            className="mt-1 block w-full rounded-md border-2 border-gray-200 p-0.5 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        />
+                    </label>
                     <label className="block mb-4">
                         <span className="text-gray-700">Title:</span>
                         <input
@@ -80,9 +115,11 @@ const CreateComment = () => {
                             className="mt-1 block w-full rounded-md border-2 border-gray-200 p-2 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                         />
                     </label>
-                    <button type="submit"
-                            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Submit
+                    <button disabled={commentSubmitted} type="submit"
+                            className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${commentSubmitted ? "bg-gray-700 hover:bg-gray-700 opacity-15" : ""}`}>Submit
                     </button>
+                    {commentSubmitted && <p className="text-green-500 mt-4">Comment submitted successfully</p>}
+                    {commentSubmitted && <button className={`w-full py-2 px-4 border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-900 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`} onClick={() => setCommentSubmitted(false)}>Write a new comment</button>}
                 </form>
             </div>
         </div>
