@@ -11,6 +11,9 @@
     "update-types": "npx supabase gen types typescript --project-id \"jhcpcyjdjlipplyukabf\" > ./types/supabase.ts"
   },
   "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.0.5",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/supabase-js": "^2.42.3",

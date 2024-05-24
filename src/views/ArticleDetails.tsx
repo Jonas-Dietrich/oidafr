@@ -6,6 +6,8 @@ import FeedListItem from "@/components/FeedListItem.tsx";
 import NotFoundPage from "@/views/NotFoundPage.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
+import ArticleDetailsCard from "@/components/ArticleDetailsCard.tsx";
+import {parseRssItem} from "@/utils/jsonHelper.ts";
 
 const ArticleDetails = () => {
     const {item_id} = useParams();
@@ -16,7 +18,7 @@ const ArticleDetails = () => {
 
     const fetchArticle = useCallback(async () => {
         if (item_id && !isNaN(+item_id)) {
-            getItemById(+item_id).then(r => setItem(r.data)).catch(e => {
+            getItemById(+item_id).then(r => setItem(parseRssItem(r.data))).catch(e => {
                 toast({
                     variant: "destructive",
                     title: `The requested item with id ${item_id} was not found.`,
@@ -40,7 +42,8 @@ const ArticleDetails = () => {
     }, [fetchArticle]);
 
     return (
-        <div>
+        <div className={"p-10"}>
+            {item && <ArticleDetailsCard rssItem={item} />}
             {item && <RssItemItem item={item}></RssItemItem>}
             {item && <FeedListItem feed={item.rssChannel}/>}
             {httpStatus === 404 && <NotFoundPage/>}

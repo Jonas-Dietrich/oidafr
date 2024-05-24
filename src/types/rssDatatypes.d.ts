@@ -37,7 +37,8 @@ interface RssItem {
 
     enclosureURL: RssEnclosureURL,
 
-//  private LocalDateTime pubDate TO WORRY BOUT LATRER 
+//  private LocalDateTime pubDate TO WORRY BOUT LATRER
+    pubDate: Date,
 
     category: RssCategory,
 
