@@ -75,8 +75,8 @@ const CreateComment = () => {
     }, [commentSubmitted]);
 
     return (
-        <div className="bg-blue-50 p-10 flex justify-center pt-10">
-            <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
+        <div className="p-10 flex justify-center pt-10">
+            <div className="bg-gray-100 rounded-lg shadow-lg shadow-gray-400 p-8 w-full max-w-lg">
                 <h1 className="text-2xl font-bold text-blue-500 mb-6">Write and leave your own Comment</h1>
                 <form onSubmit={handleSubmit}>
                     <label className="block mb-4">
@@ -85,7 +85,7 @@ const CreateComment = () => {
                             type="text"
                             value={author}
                             onChange={e => setAuthor(e.target.value)}
-                            className="mt-1 block w-full rounded-md border-2 border-gray-200 p-0.5 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            className="mt-2 block w-full rounded-md border-2 border-gray-200 p-1 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                         />
                     </label>
                     <label className="block mb-4">
@@ -94,7 +94,7 @@ const CreateComment = () => {
                             type="text"
                             value={title}
                             onChange={e => setTitle(e.target.value)}
-                            className="mt-1 block w-full rounded-md border-2 border-gray-200 p-0.5 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            className="mt-2 block w-full rounded-md border-2 border-gray-200 p-1 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                         />
                     </label>
                     <label className="block mb-4">
@@ -103,7 +103,7 @@ const CreateComment = () => {
                             type="text"
                             value={link}
                             onChange={e => setLink(e.target.value)}
-                            className="mt-1 block w-full rounded-md border-2 border-gray-200 p-0.5 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                            className="mt-2 block w-full rounded-md border-2 border-gray-200 p-1 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                         />
                     </label>
                     <label className="block mb-4">
