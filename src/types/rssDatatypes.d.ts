@@ -46,6 +46,8 @@ interface RssItem {
     guid: string,
 
     source: RssSource,
+
+    rssChannel: RssChannel
 }
     
 interface RssCategory {

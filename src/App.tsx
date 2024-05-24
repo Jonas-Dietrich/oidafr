@@ -13,6 +13,7 @@ import Header from './components/Header.tsx';
 import CreateComment from "@/views/CreateComment.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import NotFoundPage from "@/views/NotFoundPage.tsx";
+import ArticleDetails from "@/views/ArticleDetails.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/account" element={<AccountManagement />} />
                     <Route path="/my-feeds" element={<MyFeeds/>}/>
                     <Route path="/my-articles" element={<MyArticles/>} />
+                    <Route path="/my-articles/:item_id" element={<ArticleDetails />} />
                     <Route path="/account-recovery" element={<PasswordReset />} />
                     <Route path="/comments/create" element={<CreateComment />} />
                     <Route path="*" element={<NotFoundPage />} />
