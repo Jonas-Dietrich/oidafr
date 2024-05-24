@@ -21,8 +21,8 @@ const Home = () => {
     return (
         <div className="flex flex-col items-center justify-center mt-52 text-gray-900">
             <img src={rssImage} alt="RSS logo" className="mb-4 size-52"/>
-            <h1 className="text-5xl font-bold mb-4">Welcome to Our RSS Application</h1>
-            <h2 className="text-2xl font-bold mb-4">Hi, {userName}</h2>
+            <h1 className="text-5xl font-bold mb-4">Welcome to our RSS application!</h1>
+            <h2 className="text-2xl font-bold mb-4">Hi, {userName}! 👋</h2>
             <p className="text-lg mb-8">Stay updated with the latest news from your favorite websites.</p>
             <div className="flex">
                 <a href="/comments/create"
