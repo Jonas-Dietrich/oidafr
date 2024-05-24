@@ -9,6 +9,8 @@ import {Toaster} from "@/components/ui/toaster.tsx";
 import ArticleDetailsCard from "@/components/ArticleDetailsCard.tsx";
 import {parseRssItem} from "@/utils/jsonHelper.ts";
 
+const beUrl = import.meta.env.VITE_BACKEND_URL as string;
+
 const ArticleDetails = () => {
     const {item_id} = useParams();
     const [item, setItem] = useState<RssItem | null>(null);
@@ -43,7 +45,7 @@ const ArticleDetails = () => {
 
     return (
         <div className={"p-10"}>
-            {item && <ArticleDetailsCard rssItem={item} />}
+            {item && <ArticleDetailsCard rssItem={item} isChannelTrustWorthy={item.rssChannel.feedUrl !== beUrl} />}
             {item && <RssItemItem item={item}></RssItemItem>}
             {item && <FeedListItem feed={item.rssChannel}/>}
             {httpStatus === 404 && <NotFoundPage/>}

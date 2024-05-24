@@ -1,11 +1,5 @@
 import React from "react";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"
 import {Label} from "@/components/ui/label.tsx";
 
 import {
@@ -23,53 +17,56 @@ import {
 import rssImage from '../assets/rssWarning.png';
 
 interface ArticleDetailsCardProps {
-    rssItem: RssItem
+    rssItem: RssItem,
+    isChannelTrustWorthy?: boolean
 }
 
-const ArticleDetailsCard:React.FC<ArticleDetailsCardProps> = ({rssItem}) => {
+const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChannelTrustWorthy = true}) => {
     const [openAlertDialog, setOpenAlertDialog] = React.useState<boolean>(false);
 
     const handleClick = (event: React.MouseEvent) => {
-        event.preventDefault()
-        setOpenAlertDialog(true)
+        if (!isChannelTrustWorthy) {
+            event.preventDefault()
+            setOpenAlertDialog(true)
+        }
     }
 
     return (
         <>
-        <Card>
-            <CardHeader>
-                <CardTitle>{rssItem?.title}</CardTitle>
-                <CardDescription>{rssItem?.author} - {rssItem?.pubDate.toDateString()}</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <div>
-                    <Label htmlFor="name">Link</Label>
-                    <p className="text-lg">
-                        <a href={rssItem?.link} onClick={handleClick}>{rssItem?.link}</a>
-                    </p>
-                </div>
-                <div className="mt-3">
-                    <Label htmlFor="name">Category</Label>
-                    <p className="text-lg">{rssItem?.category?.categoryName}</p>
-                </div>
-                <div className="mt-3">
-                    <Label htmlFor="name">Description</Label>
-                    <p className="text-lg">{rssItem?.description}</p>
-                </div>
-                <div className="mt-3">
-                    <Label htmlFor="name">Comments</Label>
-                    <p className="text-lg">{rssItem?.comments}</p>
-                </div>
-                <div className="mt-3">
-                    <Label htmlFor="name">GUID</Label>
-                    <p className="text-lg">{rssItem?.guid}</p>
-                </div>
-                <div className="mt-3">
-                    <Label htmlFor="name">Source</Label>
-                    <p className="text-lg">{rssItem?.source?.sourceName}</p>
-                </div>
-            </CardContent>
-        </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle>{rssItem?.title}</CardTitle>
+                    <CardDescription>{rssItem?.author} - {rssItem?.pubDate.toDateString()}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div>
+                        <Label htmlFor="name">Link</Label>
+                        <p className="text-lg">
+                            <a href={rssItem?.link} onClick={handleClick}>{rssItem?.link}</a>
+                        </p>
+                    </div>
+                    <div className="mt-3">
+                        <Label htmlFor="name">Category</Label>
+                        <p className="text-lg">{rssItem?.category?.categoryName}</p>
+                    </div>
+                    <div className="mt-3">
+                        <Label htmlFor="name">Description</Label>
+                        <p className="text-lg">{rssItem?.description}</p>
+                    </div>
+                    <div className="mt-3">
+                        <Label htmlFor="name">Comments</Label>
+                        <p className="text-lg">{rssItem?.comments}</p>
+                    </div>
+                    <div className="mt-3">
+                        <Label htmlFor="name">GUID</Label>
+                        <p className="text-lg">{rssItem?.guid}</p>
+                    </div>
+                    <div className="mt-3">
+                        <Label htmlFor="name">Source</Label>
+                        <p className="text-lg">{rssItem?.source?.sourceName}</p>
+                    </div>
+                </CardContent>
+            </Card>
             <AlertDialog open={openAlertDialog} onOpenChange={setOpenAlertDialog}>
                 <AlertDialogTrigger>Open</AlertDialogTrigger>
                 <AlertDialogContent>
