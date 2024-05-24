@@ -33,7 +33,7 @@ const ArticleDetails = () => {
             console.log("inv")
             setHttpStatus(404)
         }
-    }, [item_id]);
+    }, [item_id, toast]);
 
     useEffect(() => {
         fetchArticle().then(() => console.log("fetchArticle executed"));
