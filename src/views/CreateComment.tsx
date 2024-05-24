@@ -66,7 +66,7 @@ const CreateComment = () => {
     }
 
     useEffect(() => {
-        if (commentSubmitted === false) {
+        if (!commentSubmitted) {
             setTitle('');
             setLink('');
             setDescription('');
