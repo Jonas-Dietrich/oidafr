@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import {getItemById} from "@/utils/requestHelper.ts";
 import RssItemItem from "@/components/RssItemItem.tsx";
 import FeedListItem from "@/components/FeedListItem.tsx";
@@ -10,18 +10,18 @@ const ArticleDetails = () => {
     const [item, setItem] = useState<RssItem | null>(null);
     const [httpStatus, setHttpStatus] = useState<number | null>(null);
 
-    const fetchArticle = async () => {
+    const fetchArticle = useCallback(async () => {
         if (item_id && !isNaN(+item_id)) {
             getItemById(+item_id).then(r => setItem(r.data)).catch(e => setHttpStatus(e.response.status));
         }
         else {
             setHttpStatus(404)
         }
-    }
+    }, [item_id]);
 
     useEffect(() => {
         fetchArticle().then(() => console.log("fetchArticle executed"));
-    }, [item_id]);
+    }, [fetchArticle]);
 
     return (
         <div>
