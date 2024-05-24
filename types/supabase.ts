@@ -30,11 +30,10 @@ export type Database = {
       rss_channel: {
         Row: {
           category_category_id: number | null
-          channel_id: number
           copyright: string | null
           description: string | null
           docs: string | null
-          feed_url: string | null
+          feed_url: string
           generator: string | null
           language: string | null
           last_build_date: string | null
@@ -47,11 +46,10 @@ export type Database = {
         }
         Insert: {
           category_category_id?: number | null
-          channel_id: number
           copyright?: string | null
           description?: string | null
           docs?: string | null
-          feed_url?: string | null
+          feed_url: string
           generator?: string | null
           language?: string | null
           last_build_date?: string | null
@@ -64,11 +62,10 @@ export type Database = {
         }
         Update: {
           category_category_id?: number | null
-          channel_id?: number
           copyright?: string | null
           description?: string | null
           docs?: string | null
-          feed_url?: string | null
+          feed_url?: string
           generator?: string | null
           language?: string | null
           last_build_date?: string | null
@@ -158,7 +155,7 @@ export type Database = {
           item_id: number
           link: string | null
           pub_date: string | null
-          rss_channel_channel_id: number | null
+          rss_channel_feed_url: string | null
           source_source_id: number | null
           title: string | null
         }
@@ -172,7 +169,7 @@ export type Database = {
           item_id: number
           link?: string | null
           pub_date?: string | null
-          rss_channel_channel_id?: number | null
+          rss_channel_feed_url?: string | null
           source_source_id?: number | null
           title?: string | null
         }
@@ -186,18 +183,11 @@ export type Database = {
           item_id?: number
           link?: string | null
           pub_date?: string | null
-          rss_channel_channel_id?: number | null
+          rss_channel_feed_url?: string | null
           source_source_id?: number | null
           title?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "fk2tox6bbwh6fcs2h2fkgu7xkej"
-            columns: ["rss_channel_channel_id"]
-            isOneToOne: false
-            referencedRelation: "rss_channel"
-            referencedColumns: ["channel_id"]
-          },
           {
             foreignKeyName: "fk6jvu1j2gotwwpdk4qmemwphxg"
             columns: ["enclosureurl_url_id"]
@@ -211,6 +201,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "rss_source"
             referencedColumns: ["source_id"]
+          },
+          {
+            foreignKeyName: "fkkewrworg5g1mho5e6j543t1mn"
+            columns: ["rss_channel_feed_url"]
+            isOneToOne: false
+            referencedRelation: "rss_channel"
+            referencedColumns: ["feed_url"]
           },
           {
             foreignKeyName: "fkn6vdw4daddkckbivrqmfonb3x"
@@ -303,6 +300,10 @@ export type Database = {
           new_plain_password: string
         }
         Returns: Json
+      }
+      count_users: {
+        Args: Record<PropertyKey, never>
+        Returns: number
       }
     }
     Enums: {

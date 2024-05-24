@@ -34,16 +34,25 @@ const Header = () => {
                 className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? '' : 'hidden'} lg:block`}>
                 <div className="text-sm lg:flex-grow">
                     <Link to="/"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">Home</Link>
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Home
+                    </Link>
                     <Link to="/account"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">My
-                        account</Link>
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        My account
+                    </Link>
+                    <Link to="/about"
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        About us
+                    </Link>
                     <Link to="/my-feeds"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">My
-                        feeds</Link>
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        My feeds
+                    </Link>
                     <Link to="/my-articles"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">My
-                        Articles</Link>
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+                        My Articles
+                    </Link>
                 </div>
                 <div>
                     <button
