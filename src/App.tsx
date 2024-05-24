@@ -11,7 +11,6 @@ import MyFeeds from "@/views/MyFeeds.tsx";
 import MyArticles from './views/MyArticles.tsx';
 import Header from './components/Header.tsx';
 import CreateComment from "@/views/CreateComment.tsx";
-import {Toaster} from "@/components/ui/toaster.tsx";
 import NotFoundPage from "@/views/NotFoundPage.tsx";
 import ArticleDetails from "@/views/ArticleDetails.tsx";
 
@@ -56,7 +55,6 @@ function App() {
                     <Route path="/comments/create" element={<CreateComment />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
-                <Toaster/>
             </BrowserRouter>
         )
     }
