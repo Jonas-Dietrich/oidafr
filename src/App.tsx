@@ -12,6 +12,7 @@ import MyArticles from './views/MyArticles.tsx';
 import Header from './components/Header.tsx';
 import CreateComment from "@/views/CreateComment.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
+import NotFoundPage from "@/views/NotFoundPage.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -51,6 +52,7 @@ function App() {
                     <Route path="/my-articles" element={<MyArticles/>} />
                     <Route path="/account-recovery" element={<PasswordReset />} />
                     <Route path="/comments/create" element={<CreateComment />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
                 <Toaster/>
             </BrowserRouter>
