@@ -1,4 +1,4 @@
-import rssImage from '../assets/rss-41072_1280.png';
+import rssImage from '../assets/rssMascot.png';
 import {useEffect, useState} from "react";
 import {getSupabaseSession} from "@/utils/supabaseUtils.ts";
 
@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
         <div className={`flex flex-col items-center justify-center sm:mt-52 mt-5 text-gray-900`}>
-            <img src={rssImage} alt="RSS logo" className="mb-4 size-52"/>
+            <img src={rssImage} alt="RSS main mascot (he is very friendly and happy)" content={"Content credentials: Generated with AI ∙ 24 May 2024 at 6:55 pm"} className="mb-4 size-52"/>
             <h1 className="text-5xl font-bold mb-4">Welcome to our RSS application!</h1>
             <h2 className="text-2xl font-bold mb-4">Hi, {userName}! 👋</h2>
             <p className="text-lg mb-8">Stay updated with the latest news from your favorite websites.</p>

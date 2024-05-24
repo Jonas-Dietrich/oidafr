@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import supabase from "@/utils/supabase";
 import {Link} from "react-router-dom";
-import rssImage from '../assets/rss-41072_1280.png';
+import rssImage from '../assets/rssFaviconLogo.png';
 
 
 const Header = () => {
@@ -12,17 +12,17 @@ const Header = () => {
     }
 
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-4">
+        <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-2">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
                 <span className="font-semibold text-xl tracking-tight">
                     <Link to="/">
-                        <img src={rssImage} alt="RSS logo" className="inline-block align-middle w-auto h-6 mr-2"/>
+                        <img src={rssImage} alt="RSS logo" className="inline-block align-middle w-auto h-10 mr-2"/>
                     </Link>
-                    RSSFeed
                 </span>
+                <h1 className="text-2xl font-bold">RSSFeed</h1>
             </div>
             <div className="block lg:hidden">
-                <button onClick={toggleMenu}
+            <button onClick={toggleMenu}
                         className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
                     <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <title>Menu</title>
