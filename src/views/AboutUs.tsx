@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import supabase from "@/utils/supabase.tsx";
 
 const AboutUs = () => {
-    const [numberOfUsers, setNumberOfUsers] = useState(999_999);
+    const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
 
     const fetchNumberOfUsers = async () => {
         supabase.rpc('count_users').then(({ data, error }) => {
@@ -20,7 +20,7 @@ const AboutUs = () => {
 
     return (
         <div>
-            <p>We have {numberOfUsers} users!</p>
+            <p>We have {numberOfUsers && numberOfUsers} users!</p>
         </div>
     );
 };

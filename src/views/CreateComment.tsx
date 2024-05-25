@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useToast} from "@/components/ui/use-toast"
 import {postUserComment} from "@/utils/requestHelper.ts";
-import {Toaster} from "@/components/ui/toaster.tsx";
 
 const CreateComment = () => {
     const [title, setTitle] = useState('');
@@ -126,7 +125,6 @@ const CreateComment = () => {
                     </form>
                 </div>
             </div>
-            <Toaster/>
         </>
     );
 };

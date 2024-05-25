@@ -1,15 +1,35 @@
-import {useState} from 'react';
-import supabase from "@/utils/supabase";
-import {Link} from "react-router-dom";
+import React, {useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
 import rssImage from '../assets/rssFaviconLogo.png';
+import supabase from "@/utils/supabase.tsx";
+import {useToast} from "@/components/ui/use-toast.ts";
 
+interface HeaderProps {
+    session?: object | null
+}
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({session = null}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
+
+    const {toast} = useToast();
+
+    const handleSignOff = () => {
+        supabase.auth.signOut()
+            .then(() => nav("/login"))
+            .catch(() => {
+                toast({
+                    variant: "destructive",
+                    title: `There has been an error signing you off`,
+                    description: "Please try again later or delete your cookies manually.",
+                })
+            })
+    }
+
+    const nav = useNavigate();
 
     return (
         <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-2">
@@ -22,7 +42,7 @@ const Header = () => {
                 <h1 className="text-2xl font-bold">RSSFeed</h1>
             </div>
             <div className="block lg:hidden">
-            <button onClick={toggleMenu}
+                <button onClick={toggleMenu}
                         className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
                     <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <title>Menu</title>
@@ -37,28 +57,41 @@ const Header = () => {
                           className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         Home
                     </Link>
-                    <Link to="/account"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                        My account
-                    </Link>
                     <Link to="/about"
                           className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         About us
                     </Link>
-                    <Link to="/my-feeds"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                        My feeds
-                    </Link>
-                    <Link to="/my-articles"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-                        My Articles
-                    </Link>
+                    {session &&
+                        <>
+                            <Link to="/account"
+                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                My account
+                            </Link>
+                            <Link to="/my-feeds"
+                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                My feeds
+                            </Link>
+                            <Link to="/my-articles"
+                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+                                My Articles
+                            </Link>
+                        </>
+                    }
                 </div>
                 <div>
-                    <button
-                        className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-                        onClick={() => supabase.auth.signOut()}>Sign off
-                    </button>
+                    {
+                        session ?
+                            <button
+                                className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+                                onClick={() => handleSignOff()}>Sign off
+                            </button>
+                            :
+                            <button
+                                className="inline-block text-sm px-4 py-2 leading-none border rounded border-transparent text-teal-500 bg-white hover:text-blue-950 hover:bg-transparent hover:border-white mt-4 lg:mt-0"
+                                onClick={() => nav("/login")}>Sign in
+                            </button>
+
+                    }
                 </div>
             </div>
         </nav>

@@ -1,6 +1,4 @@
 import {useEffect, useState} from 'react'
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
 import supabase from "./utils/supabase.tsx";
 import AccountManagement from "./views/AccountManagement.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -14,17 +12,19 @@ import CreateComment from "@/views/CreateComment.tsx";
 import NotFoundPage from "@/views/NotFoundPage.tsx";
 import ArticleDetails from "@/views/ArticleDetails.tsx";
 import AboutUs from "@/views/AboutUs.tsx";
+import Login from "@/views/Login.tsx";
+import {Toaster} from "@/components/ui/toaster.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
 
     useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabase.auth.getSession().then(({data: {session}}) => {
             setSession(session)
         })
 
         const {
-            data: { subscription },
+            data: {subscription},
         } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
         })
@@ -32,34 +32,32 @@ function App() {
         return () => subscription.unsubscribe()
     }, [])
 
-    if (!session) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-5">
-                <img src="/rss-41072_1280.png" alt="RSS Icon" className="w-32 h-32 mb-10"/>
-                <h3 className="text-2xl font-bold text-gray-900">Welcome to Really-Sophisticated-Story-Feed!</h3>
-                <h4 className="text-xl text-gray-700">Your personal RSS-feed</h4>
-                <hr className="my-4"/>
-                <Auth providers={[]} supabaseClient={supabase} appearance={{theme: ThemeSupa}}/>
-            </div>
-        )
-    } else {
-        return (
+    return (
+        <div>
             <BrowserRouter>
-                <Header/>
+                <Header session={session}/>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/account" element={<AccountManagement />} />
-                    <Route path="/my-feeds" element={<MyFeeds/>}/>
-                    <Route path="/my-articles" element={<MyArticles/>} />
-                    <Route path="/my-articles/:item_id" element={<ArticleDetails />} />
-                    <Route path="/account-recovery" element={<PasswordReset />} />
-                    <Route path="/comments/create" element={<CreateComment />} />
-                    <Route path="/about" element={<AboutUs />} />
-                    <Route path="*" element={<NotFoundPage />} />
+                    <Route path="/" element={<Home session={session}/>}/>
+                    <Route path="/login" element={<Login session={session}/>}/>
+                    <Route path="/about" element={<AboutUs/>}/>
+
+                    {session &&
+                        <>
+                            <Route path="/account-recovery" element={<PasswordReset/>}/>
+                            <Route path="/account" element={<AccountManagement/>}/>
+                            <Route path="/my-feeds" element={<MyFeeds/>}/>
+                            <Route path="/my-articles" element={<MyArticles/>}/>
+                            <Route path="/my-articles/:item_id" element={<ArticleDetails/>}/>
+                            <Route path="/comments/create" element={<CreateComment/>}/>
+                        </>
+                    }
+
+                    <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </BrowserRouter>
-        )
-    }
+            <Toaster/>
+        </div>
+    )
 }
 
 export default App;
