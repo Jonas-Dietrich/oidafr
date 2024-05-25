@@ -42,7 +42,7 @@ const ArticleDetails = () => {
         }
 
         fetchArticle().then(() => console.log("fetchArticle executed"));
-    }, []);
+    }, [toast]);
 
     return (
         <div className={"p-10"}>

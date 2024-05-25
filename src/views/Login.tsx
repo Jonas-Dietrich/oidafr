@@ -13,7 +13,7 @@ const Login:React.FC<LoginProps> = ({session}) => {
 
     useEffect(() => {
         if (session) nav("/")
-    }, [session])
+    }, [session, nav])
 
     return (
         <div className="flex flex-col items-center justify-center lg:mt-32 mt-5 text-gray-900">
