@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useToast} from "@/components/ui/use-toast"
 import {postUserComment} from "@/utils/requestHelper.ts";
-import rssImage from "@/assets/rssCommentRubber.png";
+import rssImage from "@/assets/rssCommentCollector.png";
 
 const CreateComment = () => {
     const [title, setTitle] = useState('');
@@ -79,7 +79,7 @@ const CreateComment = () => {
             <div className="flex justify-center">
                 <div className="rounded-b-xl shadow-lg shadow-gray-400 px-8 pb-8 w-full max-w-lg">
                     <div className="flex justify-center">
-                        <img src={rssImage} alt="RSS Comment" className="w-1/2 h-auto mb-6"/>
+                        <img src={rssImage} alt="our comment colloctor - please leave her a comment" content={"Content credentials: Generated with AI ∙ 24 May 2024 at 7:55 pm"} className="w-1/2 h-auto mb-6"/>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <label className="block mb-4">
