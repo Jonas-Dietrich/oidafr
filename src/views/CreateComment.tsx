@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useToast} from "@/components/ui/use-toast"
 import {postUserComment} from "@/utils/requestHelper.ts";
+import rssImage from "@/assets/rssCommentRubber.png";
 
 const CreateComment = () => {
     const [title, setTitle] = useState('');
@@ -75,41 +76,47 @@ const CreateComment = () => {
 
     return (
         <>
-            <div className="p-10 flex justify-center pt-10">
-                <div className="bg-gray-100 rounded-lg shadow-lg shadow-gray-400 p-8 w-full max-w-lg">
-                    <h1 className="text-2xl font-bold text-blue-500 mb-6">Write and leave your own Comment</h1>
+            <div className="flex justify-center">
+                <div className="rounded-b-xl shadow-lg shadow-gray-400 px-8 pb-8 w-full max-w-lg">
+                    <div className="flex justify-center">
+                        <img src={rssImage} alt="RSS Comment" className="w-1/2 h-auto mb-6"/>
+                    </div>
                     <form onSubmit={handleSubmit}>
                         <label className="block mb-4">
                             <span className="text-gray-700">Author:</span>
                             <input
+                                placeholder={"Who are you?"}
                                 type="text"
                                 value={author}
                                 onChange={e => setAuthor(e.target.value)}
-                                className="mt-2 block w-full rounded-md border-2 border-gray-200 p-1 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                className="mt-2 block w-full rounded-md border-2 border-gray-200 p-2 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                             />
                         </label>
                         <label className="block mb-4">
                             <span className="text-gray-700">Title:</span>
                             <input
+                                placeholder={"What's your comment about?"}
                                 type="text"
                                 value={title}
                                 onChange={e => setTitle(e.target.value)}
-                                className="mt-2 block w-full rounded-md border-2 border-gray-200 p-1 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                className="mt-2 block w-full rounded-md border-2 border-gray-200 p-2 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                             />
                         </label>
                         <label className="block mb-4">
                             <span className="text-gray-700">Link:</span>
                             <input
+                                placeholder={"Link to your comment"}
                                 type="text"
                                 value={link}
                                 onChange={e => setLink(e.target.value)}
-                                className="mt-2 block w-full rounded-md border-2 border-gray-200 p-1 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                className="mt-2 block w-full rounded-md border-2 border-gray-200 p-2 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                             />
                         </label>
                         <label className="block mb-4">
                             <span className="text-gray-700">Description:</span>
                             <textarea
-                                rows={10}
+                                placeholder={"Write your comment here"}
+                                rows={6}
                                 value={description}
                                 onChange={e => setDescription(e.target.value)}
                                 className="mt-1 block w-full rounded-md border-2 border-gray-200 p-2 shadow-lg focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
