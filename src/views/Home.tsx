@@ -1,4 +1,4 @@
-import rssImage from '../assets/rssMascot.png';
+import rssImage from '../assets/rssMascot.webp';
 import React, {useEffect, useState} from "react";
 import {getSupabaseSession} from "@/utils/supabaseUtils.ts";
 

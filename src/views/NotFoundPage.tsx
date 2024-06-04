@@ -1,4 +1,4 @@
-import rss404Image from '../assets/rss404.jpg';
+import rss404Image from '../assets/rss404.webp';
 import {Link} from "react-router-dom";
 import React from "react";
 

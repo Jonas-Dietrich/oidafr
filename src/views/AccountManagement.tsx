@@ -1,5 +1,5 @@
 import PasswordChange from "../components/PasswordChange.tsx";
-import rssImage from "@/assets/rssAccount.png";
+import rssImage from "@/assets/rssAccount.webp";
 
 const AccountManagement = () => {
     return (

@@ -14,7 +14,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-import rssImage from '../assets/rssWarning.png';
+import rssImage from '../assets/rssWarning.webp';
 
 interface ArticleDetailsCardProps {
     rssItem: RssItem,

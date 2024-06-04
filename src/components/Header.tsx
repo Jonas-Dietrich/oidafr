@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import rssImage from '../assets/rssFaviconLogo.png';
+import rssImage from '../assets/rssFaviconLogo.webp';
 import supabase from "@/utils/supabase.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
 

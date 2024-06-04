@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useToast} from "@/components/ui/use-toast"
 import {postUserComment} from "@/utils/requestHelper.ts";
-import rssImage from "@/assets/rssCommentCollector.png";
+import rssImage from "@/assets/rssCommentCollector.webp";
 
 const CreateComment = () => {
     const [title, setTitle] = useState('');
