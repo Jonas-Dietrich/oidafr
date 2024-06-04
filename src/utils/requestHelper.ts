@@ -20,7 +20,7 @@ export const fetchBackendFeeds = async () => {
 
     const userFeeds = await fetchUserFeeds();
         
-    const requestUrl = beUrl.concat(`/feed-list?urls=${userFeeds?.join(",")}`);
+    const requestUrl = beUrl.concat(`/feed-list?urls=${encodeURIComponent(userFeeds?.join(","))}`);
 
     const {data, status} = await axios.get<RssChannel[]>(requestUrl);
 
@@ -33,7 +33,7 @@ export const fetchBackendFeeds = async () => {
 export const fetchUserArticles = async ():Promise<RssItem[]> => {
     const userFeeds = await fetchUserFeeds();
 
-    const requestUrl = beUrl.concat(`/item-list?urls=${userFeeds?.join(",")}`);
+    const requestUrl = beUrl.concat(`/item-list?urls=${encodeURIComponent(userFeeds?.join(","))}`);
 
     const {data, status} = await axios.get<RssItem[]>(requestUrl);
 
