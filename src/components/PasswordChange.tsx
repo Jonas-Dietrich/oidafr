@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
 import supabase from '../../src/utils/supabase.tsx';
 import {Session} from "@supabase/supabase-js";
+import {useNavigate} from "react-router-dom";
+import {useToast} from "@/components/ui/use-toast.ts";
 
 const PasswordChange = () => {
     const [ session, setSession] = useState<Session>();
@@ -42,9 +44,21 @@ const PasswordChange = () => {
         }
     };
 
-    const handleLogoff = async () => {
-        await supabase.auth.signOut();
-    };
+
+    const nav = useNavigate();
+    const {toast} = useToast();
+
+    const handleSignOff = () => {
+        supabase.auth.signOut()
+            .then(() => nav("/login"))
+            .catch(() => {
+                toast({
+                    variant: "destructive",
+                    title: `There has been an error signing you off`,
+                    description: "Please try again later or delete your cookies manually.",
+                })
+            })
+    }
 
     return (
         <div>
@@ -54,7 +68,7 @@ const PasswordChange = () => {
                 <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="New Password" className="border rounded-lg px-3 py-2 mb-2 w-full" />
                 <input type="password" value={confirmNewPassword} onChange={e => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password" className="border rounded-lg px-3 py-2 mb-2 w-full" />
                 <button onClick={handlePasswordChange} className="bg-blue-500 text-white px-4 py-2 mx-1 rounded-lg">Change Password</button>
-                <button onClick={handleLogoff} className="bg-red-500 text-white px-4 py-2 mx-1 rounded-lg mt-4">Logoff</button>
+                <button onClick={handleSignOff} className="bg-red-500 text-white px-4 py-2 mx-1 rounded-lg mt-4">Logoff</button>
                 {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
                 {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
             </div>
