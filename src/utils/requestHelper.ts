@@ -1,3 +1,4 @@
+import { time } from "console";
 import supabase from "./supabase";
 import axios from "axios";
 
@@ -25,7 +26,7 @@ export const fetchBackendFeeds = async () => {
     const {data, status} = await axios.get<RssChannel[]>(requestUrl);
 
     if (status != 200) console.log("########################## ERRROR")
-        
+    
     return data
 }
 
