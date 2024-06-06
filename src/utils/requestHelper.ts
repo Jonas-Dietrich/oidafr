@@ -1,4 +1,3 @@
-import { time } from "console";
 import supabase from "./supabase";
 import axios from "axios";
 
