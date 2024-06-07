@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPaginatedArticles, fetchUserArticles } from "@/utils/requestHelper";
+import { fetchPaginatedArticles } from "@/utils/requestHelper";
 import rssArticleLibrarian from "../assets/rssArticleLibrarian.webp"
 
 import ArticleList from "@/components/ArticleList";
