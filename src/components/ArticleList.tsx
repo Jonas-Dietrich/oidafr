@@ -1,10 +1,13 @@
 import RssItemItem from "./RssItemItem";
+import { Button } from "./ui/button";
 
 interface ArticleListProps {
-    articles: RssItem[]
+    articles: RssItem[], 
+    loadMore: () => void
 }
 
-const ArticleList:React.FC<ArticleListProps> = ({articles}) => {
+const ArticleList:React.FC<ArticleListProps> = ({articles, loadMore}) => {
+
 
     return (<div>
         <h1>Amazing List of RSS items!</h1>
@@ -14,6 +17,7 @@ const ArticleList:React.FC<ArticleListProps> = ({articles}) => {
                 <RssItemItem item={item}/>
             )
         }
+        <Button variant="outline" onClick={loadMore}>Load More</Button>
     </div>);
 }
  

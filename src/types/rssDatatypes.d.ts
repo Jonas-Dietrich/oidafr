@@ -69,3 +69,13 @@ interface RssSource {
     sourceName: string,
     url: string,
 }
+
+interface ItemPageable {
+    content: RssItem[], 
+    pageable: {
+        pageNumber: number, 
+        pageSize: number,
+        totalPages: number, 
+        
+    }
+}
