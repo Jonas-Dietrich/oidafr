@@ -30,17 +30,17 @@ export const fetchBackendFeeds = async () => {
 }
 
 
-export const fetchUserArticles = async ():Promise<RssItem[]> => {
-    const userFeeds = await fetchUserFeeds();
-
-    const requestUrl = beUrl.concat(`/item-list?urls=${encodeURIComponent(userFeeds?.join(","))}`);
-
-    const {data, status} = await axios.get<RssItem[]>(requestUrl);
-
-    if (status != 200) console.log("########################## ERRROR")
-        
-    return data
-}
+// export const fetchUserArticles = async ():Promise<RssItem[]> => {
+//     const userFeeds = await fetchUserFeeds();
+//
+//     const requestUrl = beUrl.concat(`/item-list?urls=${encodeURIComponent(userFeeds?.join(","))}`);
+//
+//     const {data, status} = await axios.get<RssItem[]>(requestUrl);
+//
+//     if (status != 200) console.log("########################## ERRROR")
+//
+//     return data
+// }
 
 export const fetchPaginatedArticles = async (pageNo: number, pageSize: number) => {
     
@@ -68,4 +68,8 @@ export const postUserComment = async (title: string, link: string, description: 
 
 export const getItemById = async (item_id: number) => {
     return await axios.get<RssItem>(`${beUrl}/item-list/${item_id}`);
+}
+
+export const fetchAboutStats = async () => {
+    return await axios.get<IApiAboutStats>(`${beUrl}/stats/count/aboutPage`);
 }
