@@ -46,30 +46,28 @@ const AboutUs = () => {
         <div className={`flex flex-col items-center justify-center mt-5 text-gray-900`}>
             <img src={rssImage} alt="Our RSS team - aren't they lovely"
                  content={"Content credentials: Generated with AI ∙ 4 June 2024 at 15:36 pm"} className="mb-4 size-72"/>
-            <p className={"font-bold font-mono text-xl"}>
-                We have {numberOfUsers && <CountUp end={numberOfUsers} duration={2.75} />} users!
+            <p className={"font-bold font-mono text-xl count-style"}>
+                We have {numberOfUsers && <span className="text-red-500"><CountUp end={numberOfUsers} duration={5} /></span>} users!
             </p>
             {stats && (
                 <>
-                    <p className={"font-bold font-mono text-xl"}>
-                        We are tracking {<CountUp end={stats.channelCount} duration={2.75}/>} amazing channels!
+                    <p className={"font-bold font-mono text-xl count-style"}>
+                        We are tracking {<span className="text-red-500"><CountUp end={stats.channelCount} duration={3.75}/></span>} amazing channels!
                     </p>
-                    <p className={"font-bold font-mono text-xl"}>
-                        Our users have posted {<CountUp end={stats.commentCount} duration={2.75}/>} insightful comments!
+                    <p className={"font-bold font-mono text-xl count-style"}>
+                        Our users have posted {<span className="text-red-500"><CountUp end={stats.commentCount} duration={2.75}/></span>} insightful comments!
                     </p>
-                    <p className={"font-bold font-mono text-xl"}>
-                        We have gathered {<CountUp end={stats.itemCount} duration={2.75}/>} interesting items for you!
+                    <p className={"font-bold font-mono text-xl count-style"}>
+                        We have gathered {<span className="text-red-500"><CountUp end={stats.itemCount} duration={6}/></span>} interesting items for you!
                     </p>
-                    <p className={"font-bold font-mono text-xl"}>
-                        We have categorized these into {<CountUp end={stats.categoryCount} duration={2.75}/>} unique
-                        categories!
+                    <p className={"font-bold font-mono text-xl count-style"}>
+                        We have categorized these into {<span className="text-red-500"><CountUp end={stats.categoryCount} duration={3.5}/></span>} unique categories!
                     </p>
-                    <p className={"font-bold font-mono text-xl"}>
-                        We are sourcing from {<CountUp end={stats.sourceCount} duration={2.75}/>} diverse sources!
+                    <p className={"font-bold font-mono text-xl count-style"}>
+                        We are sourcing from {<span className="text-red-500"><CountUp end={stats.sourceCount} duration={2.5}/></span>} diverse sources!
                     </p>
-                    <p className={"font-bold font-mono text-xl"}>
-                        We have {<CountUp end={stats.enclosureUrlCount} duration={2.75}/>} media files for your
-                        enjoyment!
+                    <p className={"font-bold font-mono text-xl count-style"}>
+                        We have {<span className="text-red-500"><CountUp end={stats.enclosureUrlCount} duration={5}/></span>} media files for your enjoyment!
                     </p>
                 </>
             )}
