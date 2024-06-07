@@ -46,7 +46,7 @@ export const fetchPaginatedArticles = async (pageNo: number, pageSize: number) =
     
     const userFeeds = await fetchUserFeeds();
     // ?pageSize=10&pageNo=0&urls=https://www.diepresse.com/rss/Politik&asc=false
-    const requestUrl = beUrl.concat(`/item-list/pages?pageSize=${pageSize}&pageNo=${pageNo}&urls=${userFeeds.join(",")}&asc=false`)
+    const requestUrl = beUrl.concat(`/item-list/pages?pageSize=${pageSize}&pageNo=${pageNo}&urls=${encodeURIComponent(userFeeds.join(","))}&asc=false`)
     console.log(requestUrl);
     const {data, status} = await axios.get<ItemPageable>(requestUrl);
 
