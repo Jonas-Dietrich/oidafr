@@ -9,6 +9,7 @@ import Loading from "@/components/Loading.tsx";
 const AboutUs = () => {
     const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
     const [stats, setStats] = useState<IApiAboutStats | null>(null);
+    const [beError, setBeError] = useState<string | null>(null);
 
     const fetchNumberOfUsers = async () => {
         supabase.rpc('count_users').then(({data, error}) => {
@@ -34,6 +35,7 @@ const AboutUs = () => {
                     title: `There has been an error fetching the stats.`,
                     description: "Please try again later",
                 })
+                setBeError("There has been an error fetching the number of users.")
                 console.log(e)
             })
     }
@@ -69,7 +71,7 @@ const AboutUs = () => {
                     <li>Enjoy media content directly from our platform</li>
                 </ul>
             </div>
-            {stats ? (
+            {stats && (
                 <>
                     <p className={"font-bold font-mono text-xl count-style"}>
                         We are tracking {<span className="text-red-500"><CountUp end={stats.channelCount}
@@ -101,7 +103,9 @@ const AboutUs = () => {
                         enjoyment!
                     </p>
                 </>
-            ) : <Loading/>}
+            )}
+            {(!stats && beError) && <p>{beError}</p>}
+            {(!stats && !beError) && <Loading/>}
         </div>
     );
 };
