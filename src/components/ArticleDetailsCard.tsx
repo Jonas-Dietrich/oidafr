@@ -40,6 +40,9 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                 </CardHeader>
                 <CardContent>
                     <div>
+                        <p>{rssItem?.enclosureURL?.url}</p>
+                    </div>
+                    <div>
                         <Label htmlFor="name">Link</Label>
                         <p className="text-lg">
                             <a href={rssItem?.link} onClick={handleClick}>{rssItem?.link}</a>

@@ -43,6 +43,21 @@ export const fetchUserArticles = async ():Promise<RssItem[]> => {
     return data
 }
 
+export const fetchPaginatedArticles = async (pageNo: number, pageSize: number) => {
+    
+    const userFeeds = await fetchUserFeeds();
+    // ?pageSize=10&pageNo=0&urls=https://www.diepresse.com/rss/Politik&asc=false
+    const requestUrl = beUrl.concat(`/item-list/pages?pageSize=${pageSize}&pageNo=${pageNo}&urls=${userFeeds.join(",")}&asc=false`)
+    console.log(requestUrl);
+    const {data, status} = await axios.get<ItemPageable>(requestUrl);
+
+    if (status != 200) console.log("########################## ERRROR")
+
+    console.log(data);
+        
+    return data
+}
+
 export const postUserComment = async (title: string, link: string, description: string, author: string) => {
     return await axios.post(`${beUrl}/comments`, {
         title,
