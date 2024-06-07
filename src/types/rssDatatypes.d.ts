@@ -29,7 +29,7 @@ interface RssImage {
 
 interface RssItem {
 
-    item_id: number,
+    itemId: number,
 
     title: string,
     link: string,
