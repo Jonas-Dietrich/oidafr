@@ -4,6 +4,7 @@ import rssImage from "@/assets/rssAbout.webp";
 import CountUp from 'react-countup';
 import {fetchAboutStats} from "@/utils/requestHelper.ts";
 import {toast} from "@/components/ui/use-toast.ts";
+import Loading from "@/components/Loading.tsx";
 
 const AboutUs = () => {
     const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
@@ -68,7 +69,7 @@ const AboutUs = () => {
                     <li>Enjoy media content directly from our platform</li>
                 </ul>
             </div>
-            {stats && (
+            {stats ? (
                 <>
                     <p className={"font-bold font-mono text-xl count-style"}>
                         We are tracking {<span className="text-red-500"><CountUp end={stats.channelCount}
@@ -100,7 +101,7 @@ const AboutUs = () => {
                         enjoyment!
                     </p>
                 </>
-            )}
+            ) : <Loading/>}
         </div>
     );
 };
