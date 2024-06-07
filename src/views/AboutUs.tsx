@@ -35,7 +35,7 @@ const AboutUs = () => {
                     title: `There has been an error fetching the stats.`,
                     description: "Please try again later",
                 })
-                setBeError("There has been an error fetching the number of users.")
+                setBeError("The stats could not be fetched due to a system error. Sorry!")
                 console.log(e)
             })
     }
