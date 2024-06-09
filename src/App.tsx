@@ -47,10 +47,11 @@ function App() {
                             <Route path="/account" element={<AccountManagement/>}/>
                             <Route path="/my-feeds" element={<MyFeeds/>}/>
                             <Route path="/my-articles" element={<MyArticles/>}/>
-                            <Route path="/my-articles/:item_id" element={<ArticleDetails/>}/>
                             <Route path="/comments/create" element={<CreateComment/>}/>
                         </>
                     }
+
+                    <Route path="/my-articles/:item_id" element={<ArticleDetails/>}/>
 
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"
 import {Label} from "@/components/ui/label.tsx";
 
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import rssImage from '../assets/rssWarning.webp';
+import {useLocation} from "react-router-dom";
 
 interface ArticleDetailsCardProps {
     rssItem: RssItem,
@@ -23,6 +24,7 @@ interface ArticleDetailsCardProps {
 
 const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChannelTrustWorthy = true}) => {
     const [openAlertDialog, setOpenAlertDialog] = React.useState<boolean>(false);
+    const [copied, setCopied] = useState<boolean>(false);
 
     const handleClick = (event: React.MouseEvent) => {
         if (!isChannelTrustWorthy) {
@@ -31,11 +33,19 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
         }
     }
 
+    const location = useLocation();
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(window.location.origin + location.pathname).then(() => setCopied(true));
+    }
+
     return (
         <>
             <Card>
                 <CardHeader>
                     <CardTitle>{rssItem?.title}</CardTitle>
+                    <CardDescription><button onClick={copyToClipboard}>Share{copied && <> 🗹</>}</button>
+                    </CardDescription>
                     <CardDescription>{rssItem?.author} - {rssItem?.pubDate.toDateString()}</CardDescription>
                 </CardHeader>
                 <CardContent>
