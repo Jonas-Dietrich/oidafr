@@ -23,9 +23,20 @@ interface ArticleDetailsCardProps {
     isChannelTrustWorthy?: boolean
 }
 
+const containsHtml = (str: string) => {
+    const htmlRegex = /<.*?>/g;
+    return htmlRegex.test(str);
+}
+
+const descLength = 750;
+
 const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChannelTrustWorthy = true}) => {
     const [openAlertDialog, setOpenAlertDialog] = React.useState<boolean>(false);
     const [copied, setCopied] = useState<boolean>(false);
+    const [renderHtml, setRenderHtml] = useState<boolean>(false);
+    const shouldRenderHtml = containsHtml(rssItem?.description || '');
+    const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
+
 
     const handleClick = (event: React.MouseEvent) => {
         if (!isChannelTrustWorthy) {
@@ -65,8 +76,28 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                         <p className="text-lg">{rssItem?.category?.categoryName}</p>
                     </div>
                     <div className="mt-3">
-                        <Label htmlFor="name">Description</Label>
-                        <p className="text-lg">{rssItem?.description}</p>
+                        <Label className={"mr-2"} htmlFor="name">Description</Label>
+                        {rssItem?.description.length > descLength && (
+                            <button className={"bg-gray-100 rounded-sm px-1 border-2"} onClick={() => setShowFullDescription(!showFullDescription)}>
+                                {showFullDescription ? 'Show Less' : 'Show More'}
+                            </button>
+                        )}
+                        <p className="text-lg">
+                            {showFullDescription || rssItem?.description.length <= descLength ? rssItem?.description : rssItem?.description.slice(0, descLength)}
+                        </p>
+                        {shouldRenderHtml && (
+                            <div className="m-3" style={{maxHeight: '80vh', maxWidth: '40vw', overflowY: 'scroll'}}>
+                                {renderHtml &&
+                                    <div className="text-lg" dangerouslySetInnerHTML={{__html: rssItem?.description}}/>}
+                            </div>
+                        )}
+                        {shouldRenderHtml && (
+                            <button
+                                className={`${renderHtml ? 'bg-blue-500' : 'bg-red-700'} text-white px-4 py-2 rounded-lg`}
+                                onClick={() => setRenderHtml(!renderHtml)}>
+                                {renderHtml ? 'Hide HTML Content' : 'Show HTML Content'}
+                            </button>
+                        )}
                     </div>
                     <div className="mt-3">
                         <Label htmlFor="name">Comments</Label>
