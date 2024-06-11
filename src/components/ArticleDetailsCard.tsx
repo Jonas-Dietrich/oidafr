@@ -50,8 +50,7 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
         if (!isChannelTrustWorthy && !renderHtml) {
             event.preventDefault()
             setOpenHTMLAlertDialog(true);
-        }
-        else {
+        } else {
             setRenderHtml(!renderHtml);
         }
     }
@@ -101,16 +100,26 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                         {
                             shouldRenderHtml &&
                             <>
-                                <div className="m-3" style={{maxHeight: '80vh', maxWidth: '40vw', overflowY: 'scroll'}}>
-                                    {renderHtml &&
-                                        <div className="text-lg"
-                                             dangerouslySetInnerHTML={{__html: rssItem?.description}}/>}
-                                </div>
                                 <button
-                                    className={`${renderHtml ? 'bg-blue-500' : 'bg-red-700'} text-white px-4 py-2 rounded-lg`}
+                                    className={`${renderHtml ? 'bg-blue-500' : 'bg-red-700'} text-white mt-10 px-4 py-2 rounded-lg`}
                                     onClick={handleRenderHTML}>
                                     {renderHtml ? 'Hide HTML Content' : 'Show HTML Content'}
                                 </button>
+                                {renderHtml &&
+                                    <div className={"p-5 mt-2 bg-blue-100 rounded-lg"}>
+                                        <hr className={"my-3"}></hr>
+                                        <div className="m-3" style={{
+                                            height: '40vh',
+                                            width: '40vw',
+                                            overflowY: 'scroll',
+                                            resize: 'both',
+                                            overflow: 'auto'
+                                        }}>
+                                            <div className="text-lg"
+                                                 dangerouslySetInnerHTML={{__html: rssItem?.description}}/>
+                                        </div>
+                                    </div>
+                                }
                             </>
                         }
                     </div>
