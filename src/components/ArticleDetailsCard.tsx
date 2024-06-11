@@ -31,7 +31,8 @@ const containsHtml = (str: string) => {
 const descLength = 750;
 
 const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChannelTrustWorthy = true}) => {
-    const [openAlertDialog, setOpenAlertDialog] = React.useState<boolean>(false);
+    const [openRedirectAlertDialog, setOpenRedirectAlertDialog] = React.useState<boolean>(false);
+    const [openHTMLAlertDialog, setOpenHTMLAlertDialog] = React.useState<boolean>(false);
     const [copied, setCopied] = useState<boolean>(false);
     const [renderHtml, setRenderHtml] = useState<boolean>(false);
     const shouldRenderHtml = containsHtml(rssItem?.description || '');
@@ -41,7 +42,17 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
     const handleClick = (event: React.MouseEvent) => {
         if (!isChannelTrustWorthy) {
             event.preventDefault()
-            setOpenAlertDialog(true)
+            setOpenRedirectAlertDialog(true)
+        }
+    }
+
+    const handleRenderHTML = (event: React.MouseEvent) => {
+        if (!isChannelTrustWorthy && !renderHtml) {
+            event.preventDefault()
+            setOpenHTMLAlertDialog(true);
+        }
+        else {
+            setRenderHtml(!renderHtml);
         }
     }
 
@@ -57,7 +68,8 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                 <CardHeader>
                     <CardTitle>{rssItem?.title}</CardTitle>
                     <CardDescription>
-                        <button onClick={copyToClipboard}>{copied ? <ClipboardCheck size={15} /> : <ClipboardCopy size={15} />}</button>
+                        <button onClick={copyToClipboard}>{copied ? <ClipboardCheck size={15}/> :
+                            <ClipboardCopy size={15}/>}</button>
                     </CardDescription>
                     <CardDescription>{rssItem?.author} - {rssItem?.pubDate.toDateString()}</CardDescription>
                 </CardHeader>
@@ -78,26 +90,29 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                     <div className="mt-3">
                         <Label className={"mr-2"} htmlFor="name">Description</Label>
                         {rssItem?.description.length > descLength && (
-                            <button className={"bg-gray-100 rounded-sm px-1 border-2"} onClick={() => setShowFullDescription(!showFullDescription)}>
+                            <button className={"bg-gray-100 rounded-sm px-1 border-2"}
+                                    onClick={() => setShowFullDescription(true)}>
                                 {showFullDescription ? 'Show Less' : 'Show More'}
                             </button>
                         )}
                         <p className="text-lg">
                             {showFullDescription || rssItem?.description.length <= descLength ? rssItem?.description : rssItem?.description.slice(0, descLength)}
                         </p>
-                        {shouldRenderHtml && (
-                            <div className="m-3" style={{maxHeight: '80vh', maxWidth: '40vw', overflowY: 'scroll'}}>
-                                {renderHtml &&
-                                    <div className="text-lg" dangerouslySetInnerHTML={{__html: rssItem?.description}}/>}
-                            </div>
-                        )}
-                        {shouldRenderHtml && (
-                            <button
-                                className={`${renderHtml ? 'bg-blue-500' : 'bg-red-700'} text-white px-4 py-2 rounded-lg`}
-                                onClick={() => setRenderHtml(!renderHtml)}>
-                                {renderHtml ? 'Hide HTML Content' : 'Show HTML Content'}
-                            </button>
-                        )}
+                        {
+                            shouldRenderHtml &&
+                            <>
+                                <div className="m-3" style={{maxHeight: '80vh', maxWidth: '40vw', overflowY: 'scroll'}}>
+                                    {renderHtml &&
+                                        <div className="text-lg"
+                                             dangerouslySetInnerHTML={{__html: rssItem?.description}}/>}
+                                </div>
+                                <button
+                                    className={`${renderHtml ? 'bg-blue-500' : 'bg-red-700'} text-white px-4 py-2 rounded-lg`}
+                                    onClick={handleRenderHTML}>
+                                    {renderHtml ? 'Hide HTML Content' : 'Show HTML Content'}
+                                </button>
+                            </>
+                        }
                     </div>
                     <div className="mt-3">
                         <Label htmlFor="name">Comments</Label>
@@ -113,7 +128,7 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                     </div>
                 </CardContent>
             </Card>
-            <AlertDialog open={openAlertDialog} onOpenChange={setOpenAlertDialog}>
+            <AlertDialog open={openRedirectAlertDialog} onOpenChange={setOpenRedirectAlertDialog}>
                 <AlertDialogTrigger>Open</AlertDialogTrigger>
                 <AlertDialogContent>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -134,6 +149,29 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                         <AlertDialogAction>Cancel</AlertDialogAction>
                         <AlertDialogCancel onClick={() => window.open(rssItem?.link, '_blank')}>Continue to external
                             page</AlertDialogCancel>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+
+            <AlertDialog open={openHTMLAlertDialog} onOpenChange={setOpenHTMLAlertDialog}>
+                <AlertDialogTrigger>Open</AlertDialogTrigger>
+                <AlertDialogContent>
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <img src={rssImage} alt="Our careful mascot - always taking care of her users"
+                             content={"Content credentials: Generated with AI ∙ 24 May 2024 at 10:11 pm"}
+                             className="size-40"/>
+                    </div>
+
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>You are about to render potentially unsafe HTML.</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Are you sure you want to continue? Do you trust this comment by <span
+                            className={"text-red-700"}>{rssItem?.author}</span>? Hackers might steal your data!
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogAction>Cancel</AlertDialogAction>
+                        <AlertDialogCancel onClick={() => setRenderHtml(true)}>Render HTML anyway</AlertDialogCancel>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
