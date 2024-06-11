@@ -16,6 +16,7 @@ import {
 
 import rssImage from '../assets/rssWarning.webp';
 import {useLocation} from "react-router-dom";
+import {ClipboardCheck, ClipboardCopy} from "lucide-react";
 
 interface ArticleDetailsCardProps {
     rssItem: RssItem,
@@ -44,7 +45,8 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
             <Card>
                 <CardHeader>
                     <CardTitle>{rssItem?.title}</CardTitle>
-                    <CardDescription><button onClick={copyToClipboard}>Share{copied && <> 🗹</>}</button>
+                    <CardDescription>
+                        <button onClick={copyToClipboard}>{copied ? <ClipboardCheck size={15} /> : <ClipboardCopy size={15} />}</button>
                     </CardDescription>
                     <CardDescription>{rssItem?.author} - {rssItem?.pubDate.toDateString()}</CardDescription>
                 </CardHeader>
