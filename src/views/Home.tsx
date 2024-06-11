@@ -44,10 +44,16 @@ const Home: React.FC<HomeProps> = ({session}) => {
                 </a>
             </div>}
             {!session &&
-                <a href="/login"
-                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">
-                    Log in or sign up
-                </a>
+                <div className={"flex"}>
+                    <a href="/login"
+                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">
+                        Log in or sign up
+                    </a>
+                    <a href="/about"
+                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">
+                        Learn about us
+                    </a>
+                </div>
             }
         </div>
     );
