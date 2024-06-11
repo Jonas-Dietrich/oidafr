@@ -90,7 +90,7 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                         <Label className={"mr-2"} htmlFor="name">Description</Label>
                         {rssItem?.description.length > descLength && (
                             <button className={"bg-gray-100 rounded-sm px-1 border-2"}
-                                    onClick={() => setShowFullDescription(true)}>
+                                    onClick={() => setShowFullDescription(!showFullDescription)}>
                                 {showFullDescription ? 'Show Less' : 'Show More'}
                             </button>
                         )}
