@@ -24,7 +24,7 @@ interface ArticleDetailsCardProps {
 }
 
 const containsHtml = (str: string) => {
-    const htmlRegex = /<.*?>/g;
+    const htmlRegex = /<(.+?)>.*?<\/\1>/g;
     return htmlRegex.test(str);
 }
 
@@ -106,17 +106,15 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                                     {renderHtml ? 'Hide HTML Content' : 'Show HTML Content'}
                                 </button>
                                 {renderHtml &&
-                                    <div className={"p-5 mt-2 bg-blue-100 rounded-lg"}>
-                                        <hr className={"my-3"}></hr>
-                                        <div className="m-3" style={{
+                                    <div className={"p-8 mt-2 bg-blue-100 rounded-lg"}>
+                                        <div className="p-5 bg-white" style={{
                                             height: '40vh',
                                             width: '40vw',
                                             overflowY: 'scroll',
                                             resize: 'both',
                                             overflow: 'auto'
                                         }}>
-                                            <div className="text-lg"
-                                                 dangerouslySetInnerHTML={{__html: rssItem?.description}}/>
+                                            <div dangerouslySetInnerHTML={{__html: rssItem?.description}}/>
                                         </div>
                                     </div>
                                 }
