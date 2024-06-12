@@ -24,8 +24,14 @@ interface ArticleDetailsCardProps {
 }
 
 const containsHtml = (str: string) => {
-    const htmlRegex = /<(.+?)>.*?<\/\1>/g;
-    return htmlRegex.test(str);
+    const a = document.createElement('div');
+    a.innerHTML = str;
+
+    for (let c = a.childNodes, i = c.length; i--; ) {
+        if (c[i].nodeType == 1) return true;
+    }
+
+    return false;
 }
 
 const descLength = 750;
@@ -182,7 +188,6 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-
         </>
     );
 };
