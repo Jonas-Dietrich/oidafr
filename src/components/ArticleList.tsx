@@ -10,8 +10,6 @@ const ArticleList:React.FC<ArticleListProps> = ({articles, loadMore}) => {
 
 
     return (<div>
-        <h1>Amazing List of RSS items!</h1>
-
         {
             articles.map((item: RssItem) =>
                 <RssItemItem item={item}/>

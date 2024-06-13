@@ -72,9 +72,14 @@ const Header: React.FC<HeaderProps> = ({session = null}) => {
                                 My feeds
                             </Link>
                             <Link to="/my-articles"
-                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                                 My Articles
+                            </Link> 
+                            <Link to="/comments/view"
+                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+                                User Comments
                             </Link>
+
                         </>
                     }
                 </div>

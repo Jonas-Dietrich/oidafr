@@ -48,7 +48,6 @@ export const fetchPaginatedArticles = async (pageNo: number, pageSize: number) =
     const userFeeds = await fetchUserFeeds();
     // ?pageSize=10&pageNo=0&urls=https://www.diepresse.com/rss/Politik&asc=false
     const requestUrl = beUrl.concat(`/item-list/pages?pageSize=${pageSize}&pageNo=${pageNo}&urls=${userFeeds.join(",")}&asc=false`)
-    console.log(requestUrl);
     const {data, status} = await axios.get<ItemPageable>(requestUrl);
 
     if (status != 200) console.log("########################## ERRROR")
@@ -65,6 +64,22 @@ export const postUserComment = async (title: string, link: string, description: 
         description,
         author,
     });
+}
+
+export const getUserComments = async (after: string) => {
+    const {data, status} = await axios.get<UserComment[]>(`${beUrl}/comments/${after}`);
+
+    if (status != 200) console.log("###################### ERROR")
+
+    return data
+}
+
+export const getPaginatedUserComments = async (pageNo: number) => {
+    const {data, status} = await axios.get<UserCommentPageable>(`${beUrl}/comments/pages?pageNo=${pageNo}?pageSize=3`);
+
+    if (status != 200) console.log("###################### ERROR")
+
+    return data
 }
 
 export const getItemById = async (item_id: number) => {

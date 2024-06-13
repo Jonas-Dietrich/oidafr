@@ -14,6 +14,7 @@ import ArticleDetails from "@/views/ArticleDetails.tsx";
 import AboutUs from "@/views/AboutUs.tsx";
 import Login from "@/views/Login.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
+import UserComments from './views/UserComments.tsx';
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -49,6 +50,7 @@ function App() {
                             <Route path="/my-articles" element={<MyArticles/>}/>
                             <Route path="/my-articles/:item_id" element={<ArticleDetails/>}/>
                             <Route path="/comments/create" element={<CreateComment/>}/>
+                            <Route path="/comments/view" element={<UserComments/>}/>
                         </>
                     }
 

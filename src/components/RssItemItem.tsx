@@ -1,14 +1,9 @@
+import {shorten} from "../utils/generalHelper"
+
 interface RssItemItemProps {
     item: RssItem
 }
 
-const shorten = (toShorten: string):string => {
-    if (toShorten.length >= 300) {
-        return toShorten.slice(0, 301) + "...";
-    }
-
-    return toShorten;
-}
 
 const RssItemItem:React.FC<RssItemItemProps> = ({item}) => {
     return (<div className="border-2 border-teal-500 border-solid mb-4 rounded-md m-3">
