@@ -11,7 +11,7 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
+    // AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
 import rssImage from '../assets/rssWarning.webp';
@@ -142,7 +142,7 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
                 </CardContent>
             </Card>
             <AlertDialog open={openRedirectAlertDialog} onOpenChange={setOpenRedirectAlertDialog}>
-                <AlertDialogTrigger>Open</AlertDialogTrigger>
+                {/*<AlertDialogTrigger>Open</AlertDialogTrigger>*/}
                 <AlertDialogContent>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         <img src={rssImage} alt="Our careful mascot - always taking care of her users"
@@ -167,7 +167,7 @@ const ArticleDetailsCard: React.FC<ArticleDetailsCardProps> = ({rssItem, isChann
             </AlertDialog>
 
             <AlertDialog open={openHTMLAlertDialog} onOpenChange={setOpenHTMLAlertDialog}>
-                <AlertDialogTrigger>Open</AlertDialogTrigger>
+                {/*<AlertDialogTrigger>Open</AlertDialogTrigger>*/}
                 <AlertDialogContent>
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         <img src={rssImage} alt="Our careful mascot - always taking care of her users"
