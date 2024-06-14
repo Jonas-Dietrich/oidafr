@@ -10,4 +10,5 @@ interface IApiAboutStats {
 interface ITopChannel {
     rssChannel: RssChannel;
     count: number;
+    copied?: boolean;
 }

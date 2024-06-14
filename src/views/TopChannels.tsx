@@ -4,6 +4,7 @@ import Loading from "@/components/Loading.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import {toast} from "@/components/ui/use-toast.ts";
 import NotFoundPage from "@/views/NotFoundPage.tsx";
+import {ClipboardCheck, ClipboardCopy} from "lucide-react";
 
 interface CustomError extends Error {
     code: string;
@@ -31,6 +32,13 @@ const TopChannels = () => {
         fetchData().then(() => console.log("fetch executed"));
     }, []);
 
+    const copyToClipboard = (c: ITopChannel) => {
+        navigator.clipboard.writeText(c.rssChannel.feedUrl).then(() => {
+            c.copied = true;
+            if (topChannels) setTopChannels([...topChannels]);
+        });
+    }
+
     return (
         <>
             {(!topChannels && !beError) &&
@@ -42,8 +50,18 @@ const TopChannels = () => {
             <div className="flex flex-col">
                 {topChannels && topChannels.map((channel: ITopChannel, index) => (
                     <div key={index} className="p-4 border-b border-gray-200">
-                        <h2 className="text-xl font-bold">{channel.rssChannel.title}</h2>
+                        <h2 className="text-xl font-bold">
+                            <a href={channel.rssChannel.link} target="_blank" rel="noopener noreferrer">
+                                {channel.rssChannel.title}
+                            </a>
+                        </h2>
                         <p className="text-gray-600">{channel.count} posts</p>
+                        <p className={"text-gray-400"}>
+                            Copy feed url
+                            <button onClick={() => copyToClipboard(channel)}>{channel.copied ?
+                                <ClipboardCheck size={15}/> :
+                                <ClipboardCopy size={15}/>}</button>
+                        </p>
                     </div>
                 ))}
 
