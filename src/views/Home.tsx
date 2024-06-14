@@ -42,6 +42,10 @@ const Home: React.FC<HomeProps> = ({session}) => {
                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2">
                     See your latest articles
                 </a>
+                <a href="/top-channels"
+                   className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">
+                    Find your next channel
+                </a>
             </div>}
             {!session &&
                 <div className={"flex"}>
@@ -52,6 +56,10 @@ const Home: React.FC<HomeProps> = ({session}) => {
                     <a href="/about"
                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">
                         Learn about us
+                    </a>
+                    <a href="/top-channels"
+                       className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-2">
+                        Explore our top channels
                     </a>
                 </div>
             }
