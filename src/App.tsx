@@ -14,6 +14,7 @@ import ArticleDetails from "@/views/ArticleDetails.tsx";
 import AboutUs from "@/views/AboutUs.tsx";
 import Login from "@/views/Login.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
+import TopChannels from "@/views/TopChannels.tsx";
 
 function App() {
     const [session, setSession] = useState<object | null>(null)
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/" element={<Home session={session}/>}/>
                     <Route path="/login" element={<Login session={session}/>}/>
                     <Route path="/about" element={<AboutUs/>}/>
+                    <Route path="/top-channels" element={<TopChannels/>}/>
 
                     {session &&
                         <>

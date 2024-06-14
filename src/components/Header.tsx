@@ -61,6 +61,10 @@ const Header: React.FC<HeaderProps> = ({session = null}) => {
                           className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         About us
                     </Link>
+                    <Link to="/top-channels"
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Top channels
+                    </Link>
                     {session &&
                         <>
                             <Link to="/account"

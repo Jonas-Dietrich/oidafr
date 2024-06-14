@@ -6,3 +6,8 @@ interface IApiAboutStats {
     sourceCount: number;
     enclosureUrlCount: number;
 }
+
+interface ITopChannel {
+    rssChannel: RssChannel;
+    count: number;
+}

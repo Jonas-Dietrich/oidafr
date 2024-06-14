@@ -73,3 +73,7 @@ export const getItemById = async (item_id: number) => {
 export const fetchAboutStats = async () => {
     return await axios.get<IApiAboutStats>(`${beUrl}/stats/count/aboutPage`);
 }
+
+export const fetchTopChannels = async (count: number = 10)=> {
+    return await axios.get<ITopChannel[]>(`${beUrl}/feed-list/topChannels?numOfChannels=${count}`)
+}
