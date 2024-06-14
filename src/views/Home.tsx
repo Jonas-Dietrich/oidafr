@@ -23,7 +23,7 @@ const Home: React.FC<HomeProps> = ({session}) => {
     }, []);
 
     return (
-        <div className={`flex flex-col items-center justify-center lg:mt-52 mt-5 text-gray-900`}>
+        <div className={`flex flex-col items-center justify-center pt-2 divFullHeight text-gray-900`}>
             <img src={rssImage} alt="RSS main mascot (he is very friendly and happy)"
                  content={"Content credentials: Generated with AI ∙ 24 May 2024 at 6:55 pm"} className="mb-4 size-52"/>
             <h1 className="text-5xl font-bold mb-4">Welcome to our RSS application!</h1>

@@ -15,7 +15,7 @@ const NotFoundPage: React.FC<NotFoundPageProps> = (
         linkText = "Go back to Home"
     }) => {
     return (
-        <div className="flex flex-col items-center justify-center lg:mt-48 mt-5 text-center p-4">
+        <div className="flex flex-col items-center justify-center pt-5 divFullHeight text-center p-4">
             <div className="overflow-hidden h-52 w-auto rounded-xl mb-10">
                 <a href="https://http.cat/status/404" target="_blank" rel="noopener noreferrer"
                    style={{cursor: 'default'}}>
