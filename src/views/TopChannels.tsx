@@ -49,19 +49,23 @@ const TopChannels = () => {
 
             <div className="flex flex-col">
                 {topChannels && topChannels.map((channel: ITopChannel, index) => (
-                    <div key={index} className="p-4 border-b border-gray-200">
-                        <h2 className="text-xl font-bold">
-                            <a href={channel.rssChannel.link} target="_blank" rel="noopener noreferrer">
-                                {channel.rssChannel.title}
-                            </a>
-                        </h2>
-                        <p className="text-gray-600">{channel.count} posts</p>
-                        <p className={"text-gray-400"}>
-                            Copy feed url
-                            <button onClick={() => copyToClipboard(channel)}>{channel.copied ?
-                                <ClipboardCheck size={15}/> :
-                                <ClipboardCopy size={15}/>}</button>
-                        </p>
+                    <div key={index} className="p-4 border-b border-gray-200 flex items-center justify-between">
+                        <div>
+                            <h2 className="text-xl font-bold">
+                                <a href={channel.rssChannel?.link} target="_blank" rel="noopener noreferrer">
+                                    {channel.rssChannel?.title}
+                                </a>
+                            </h2>
+                            <p className="text-gray-600">{channel.count} posts</p>
+                            <p className={"text-gray-400"}>
+                                Copy feed url
+                                <button onClick={() => copyToClipboard(channel)}>{channel.copied ?
+                                    <ClipboardCheck size={15}/> :
+                                    <ClipboardCopy size={15}/>}</button>
+                            </p>
+                        </div>
+                        {channel.rssChannel?.rssImage?.url &&
+                            <a href={channel.rssChannel?.link}><img src={channel.rssChannel.rssImage.url} alt="Channel logo" className="ml-4 max-h-20"/></a>}
                     </div>
                 ))}
 
