@@ -66,6 +66,7 @@ const TopChannels = () => {
                         </div>
                         {channel.rssChannel?.rssImage?.url &&
                             <a href={channel.rssChannel?.link}><img src={channel.rssChannel.rssImage.url} alt="Channel logo" className="ml-4 max-h-20"/></a>}
+                        {!channel.rssChannel?.rssImage?.url && <a href={channel.rssChannel?.link}><img src={"https://cdn4.iconfinder.com/data/icons/picture-sharing-sites/32/No_Image-1024.png"} alt="Channel logo" className="ml-4 max-h-20"/></a>}
                     </div>
                 ))}
 
