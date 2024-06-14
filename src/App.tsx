@@ -41,7 +41,7 @@ function App() {
                     <Route path="/" element={<Home session={session}/>}/>
                     <Route path="/login" element={<Login session={session}/>}/>
                     <Route path="/about" element={<AboutUs/>}/>
-                    <Route path="/top-channels" element={<TopChannels/>}/>
+                    <Route path="/top-channels" element={<TopChannels session={session}/>}/>
 
                     {session &&
                         <>
