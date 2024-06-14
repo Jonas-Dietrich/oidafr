@@ -3,6 +3,7 @@ import { fetchPaginatedArticles} from "@/utils/requestHelper";
 import rssArticleLibrarian from "../assets/rssArticleLibrarian.webp"
 
 import ArticleList from "@/components/ArticleList";
+import { Button } from "@/components/ui/button";
 
 const MyArticles = () => {
 
@@ -12,6 +13,7 @@ const MyArticles = () => {
 
     useEffect(() => {
         fetchPaginatedArticles(currentPage, 30).then((data:ItemPageable) => setArticles(data.content));
+        console.log(articles);
     }, []);
 
     const loadMore = () => {
@@ -31,7 +33,10 @@ const MyArticles = () => {
                  content={"Content credentials: Generated with AI ∙ 4 June 2024 at 15:36 pm"} className="mb-4 size-72"/>
             </div>
             <div>
-                {buttonActive ?  <ArticleList articles={articles} loadMore={loadMore}/> : <></> }
+                <ArticleList articles={articles}/>
+            </div>
+            <div>
+                { buttonActive ? <Button variant="default" onClick={loadMore}>Load More</Button> : <></> }
             </div>
         </div>
     );

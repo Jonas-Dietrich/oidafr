@@ -1,18 +1,37 @@
 import { useEffect, useState } from "react";
-import {getUserComments} from "../utils/requestHelper"
+import {getPaginatedUserComments, getUserComments} from "../utils/requestHelper"
 import UserCommentItem from "@/components/UserCommentItem";
+import { Button } from "@/components/ui/button";
 
 const UserComments = () => {
 
     const [comments, setComments] = useState<UserComment[]>([]);
+    const [buttonActive, setButtonActive] = useState<boolean>(true);
+    const [pageNo, setPageNo] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState<number>(0);
+
+    const loadMore = () => {
+        const oida = currentPage + 1;
+        setCurrentPage(oida);
+    }
 
     useEffect(() => {
-        getUserComments("2020-12-12").then(r => setComments(r));
+        if (currentPage >= 1) {
+            getPaginatedUserComments(currentPage).then(data => {
+                setComments([...comments, ...data.content]);
+                if (currentPage + 1 >= data.pageable.pageNumber) setButtonActive(false);
+            });
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        getPaginatedUserComments(currentPage).then(r => setComments(r.content));
     }, [])
     
 
     return (<div>
         {comments.map(c => <UserCommentItem comment={c}/>)} 
+        {buttonActive ? <Button onClick={loadMore}>Load more</Button> : <></>}
     </div>);
 }
  

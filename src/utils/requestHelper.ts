@@ -75,11 +75,32 @@ export const getUserComments = async (after: string) => {
 }
 
 export const getPaginatedUserComments = async (pageNo: number) => {
-    const {data, status} = await axios.get<UserCommentPageable>(`${beUrl}/comments/pages?pageNo=${pageNo}?pageSize=3`);
+    const {data, status} = await axios.get<UserCommentPageable>(`${beUrl}/comments/pages?pageSize=3&pageNo=${pageNo}`);
 
     if (status != 200) console.log("###################### ERROR")
 
     return data
+}
+
+export const isFeedVaild = async (url: string):Promise<boolean> => {
+    axios.post(`${beUrl}/feed-list`, {
+        url
+    }).then(() => {
+        return true
+    })
+    .catch(() => {
+        return false
+    })
+
+    return false
+}
+
+export const addTheFeedFr = async (url:string) => {
+    const {error} = await supabase
+        .from("user_feeds")
+        .insert({feedUrl: url})
+
+    if (error) alert("OIDA ERROR NA: " + error.message)
 }
 
 export const getItemById = async (item_id: number) => {
