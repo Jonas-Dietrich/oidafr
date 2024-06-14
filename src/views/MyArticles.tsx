@@ -1,30 +1,16 @@
 import { useEffect, useState } from "react";
-import { fetchPaginatedArticles} from "@/utils/requestHelper";
 import rssArticleLibrarian from "../assets/rssArticleLibrarian.webp"
 
 import ArticleList from "@/components/ArticleList";
-import { Button } from "@/components/ui/button";
+import { fetchUserFeeds } from "@/utils/requestHelper";
 
 const MyArticles = () => {
 
-    const [articles, setArticles] = useState<RssItem[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const [buttonActive, setButtonActive] = useState<boolean>(true);
+    const [articleUrls, setArticleUrls] = useState<string[]>([]);;
 
     useEffect(() => {
-        fetchPaginatedArticles(currentPage, 30).then((data:ItemPageable) => setArticles(data.content));
-        console.log(articles);
+        fetchUserFeeds().then(setArticleUrls);
     }, []);
-
-    const loadMore = () => {
-        setCurrentPage(currentPage + 1);
-
-        fetchPaginatedArticles(currentPage, 30).then((data:ItemPageable) => {
-            setArticles([...articles, ...data.content]);
-
-            if (currentPage + 1 >= data.pageable.totalPages) setButtonActive(false);
-        })
-    }
 
     return (
         <div>
@@ -33,10 +19,7 @@ const MyArticles = () => {
                  content={"Content credentials: Generated with AI ∙ 4 June 2024 at 15:36 pm"} className="mb-4 size-72"/>
             </div>
             <div>
-                <ArticleList articles={articles}/>
-            </div>
-            <div>
-                { buttonActive ? <Button variant="default" onClick={loadMore}>Load More</Button> : <></> }
+                <ArticleList articleUrls={articleUrls}/>
             </div>
         </div>
     );
