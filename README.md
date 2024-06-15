@@ -1,3 +1,6 @@
+# Run it locally
+To run this frontend locally, simply clone the repository and edit the VITE_BACKEND_URL in the [.env](.env) file. Change it to [http://localhost:8080](http://localhost:8080) and run the [backend](https://github.com/Really-Sophisticated-Story-Feed/RssBackend) on your local machine.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
