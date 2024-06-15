@@ -5,9 +5,9 @@ interface UserCommentItemProps {
 }
 
 const UserCommentItem:React.FC<UserCommentItemProps> = ({comment}) => {
-    return ( <div className="border-2 border-teal-500 border-solid mb-4 rounded-md m-3">
-        <div className="p-3">
-            <p className="font-bold">{comment.title}</p>
+    return ( <div key={comment.itemId} className="border-2 border-teal-500 border-solid max-w-m p-5 m-4 flex flex-row rounded-lg">
+        <div className="p-3 min-w-24">
+            <a className="text-xl font-semibold" href={`https://really-sophisticated-story-feed.onrender.com/my-articles/${comment.itemId}`}>{comment.title}</a>
             <div className="pl-3">
                 <p>{shorten(comment.description)}</p>
             </div>

@@ -15,7 +15,6 @@ const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
 
     useEffect(() => {
         fetchPaginatedArticles(currentPage, 30).then((data:ItemPageable) => setArticles(data.content));
-        console.log(articles);
     }, []);
 
     const loadMore = () => {

@@ -41,6 +41,8 @@ function App() {
                     <Route path="/" element={<Home session={session}/>}/>
                     <Route path="/login" element={<Login session={session}/>}/>
                     <Route path="/about" element={<AboutUs/>}/>
+                    <Route path="/my-articles/:item_id" element={<ArticleDetails/>}/>
+                    <Route path="/comments/view" element={<UserComments/>}/>
 
                     {session &&
                         <>
@@ -48,9 +50,7 @@ function App() {
                             <Route path="/account" element={<AccountManagement/>}/>
                             <Route path="/my-feeds" element={<MyFeeds/>}/>
                             <Route path="/my-articles" element={<MyArticles/>}/>
-                            <Route path="/my-articles/:item_id" element={<ArticleDetails/>}/>
                             <Route path="/comments/create" element={<CreateComment/>}/>
-                            <Route path="/comments/view" element={<UserComments/>}/>
                         </>
                     }
 

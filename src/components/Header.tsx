@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import rssImage from '../assets/rssFaviconLogo.webp';
 import supabase from "@/utils/supabase.tsx";
-import {useToast} from "@/components/ui/use-toast.ts";
+import { useToast } from "@/components/ui/use-toast.ts";
 
 interface HeaderProps {
     session?: object | null
 }
 
-const Header: React.FC<HeaderProps> = ({session = null}) => {
+const Header: React.FC<HeaderProps> = ({ session = null }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
 
-    const {toast} = useToast();
+    const { toast } = useToast();
 
     const handleSignOff = () => {
         supabase.auth.signOut()
@@ -36,17 +36,17 @@ const Header: React.FC<HeaderProps> = ({session = null}) => {
             <div className="flex items-center flex-shrink-0 text-white mr-6">
                 <span className="font-semibold text-xl tracking-tight">
                     <Link to="/">
-                        <img src={rssImage} alt="RSS logo" className="inline-block align-middle w-auto h-10 mr-2"/>
+                        <img src={rssImage} alt="RSS logo" className="inline-block align-middle w-auto h-10 mr-2" />
                     </Link>
                 </span>
                 <h1 className="text-2xl font-bold">RSSFeed</h1>
             </div>
             <div className="block lg:hidden">
                 <button onClick={toggleMenu}
-                        className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                    className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
                     <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                     </svg>
                 </button>
             </div>
@@ -54,29 +54,32 @@ const Header: React.FC<HeaderProps> = ({session = null}) => {
                 className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? '' : 'hidden'} lg:block`}>
                 <div className="text-sm lg:flex-grow">
                     <Link to="/"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         Home
                     </Link>
                     <Link to="/about"
-                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         About us
                     </Link>
+
+
                     {session &&
                         <>
                             <Link to="/account"
-                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                                 My account
                             </Link>
                             <Link to="/my-feeds"
-                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                                 My feeds
                             </Link>
                             <Link to="/my-articles"
-                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                                 My Articles
-                            </Link> 
+                            </Link>
+
                             <Link to="/comments/view"
-                                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+                                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                                 User Comments
                             </Link>
 

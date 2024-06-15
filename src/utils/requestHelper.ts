@@ -60,8 +60,6 @@ export const fetchPaginatedArticlesByUrl = async (urls: string[], pageNo: number
 
     if (status != 200) console.log("########################## ERRROR fetching paginated articles")
 
-    console.log(data);
-
     return data;
 }
 
