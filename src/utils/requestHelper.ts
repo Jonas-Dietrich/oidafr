@@ -1,4 +1,3 @@
-import { time } from "console";
 import supabase from "./supabase";
 import axios from "axios";
 
@@ -29,7 +28,6 @@ export const fetchBackendFeeds = async () => {
     
     return data
 }
-
 
 export const fetchUserArticles = async ():Promise<RssItem[]> => {
     const userFeeds = await fetchUserFeeds();
@@ -89,8 +87,7 @@ export const getPaginatedUserComments = async (pageNo: number) => {
 }
 
 export const isFeedVaild = async (url: string):Promise<boolean> => {
-    axios.post(`${beUrl}/feed-list`, {
-        url
+    axios.post(`${beUrl}/feed-list?url=${url}`, {
     }).then(() => {
         return true
     })
@@ -111,4 +108,12 @@ export const addTheFeedFr = async (url:string) => {
 
 export const getItemById = async (item_id: number) => {
     return await axios.get<RssItem>(`${beUrl}/item-list/${item_id}`);
+}
+
+export const fetchChannelByUrl = async (feed_url: string):Promise<RssChannel> => {
+    const allChannels = await fetchBackendFeeds();
+    const possiblyTheChannelIAmLookingFor = allChannels.find((channel) => channel.feedUrl === feed_url)
+
+    if (possiblyTheChannelIAmLookingFor) return possiblyTheChannelIAmLookingFor; 
+    else throw Error("The requested Channel does not exist.");
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import RssItemItem from "./RssItemItem";
 import { Button } from "./ui/button";
-import { fetchPaginatedArticles } from "@/utils/requestHelper";
+import { fetchPaginatedArticles, fetchPaginatedArticlesByUrl} from "@/utils/requestHelper";
 
 interface ArticleListProps {
     articleUrls: string[], 
@@ -14,13 +14,13 @@ const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
     const [buttonActive, setButtonActive] = useState<boolean>(true);
 
     useEffect(() => {
-        fetchPaginatedArticles(currentPage, 30).then((data:ItemPageable) => setArticles(data.content));
+        fetchPaginatedArticlesByUrl(articleUrls, currentPage, 20).then((data:ItemPageable) => setArticles(data.content));
     }, []);
 
     const loadMore = () => {
         setCurrentPage(currentPage + 1);
 
-        fetchPaginatedArticles(currentPage, 30).then((data:ItemPageable) => {
+        fetchPaginatedArticles(currentPage, 20).then((data:ItemPageable) => {
             setArticles([...articles, ...data.content]);
 
             if (currentPage + 1 >= data.pageable.totalPages) setButtonActive(false);

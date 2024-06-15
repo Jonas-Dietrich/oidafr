@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {getPaginatedUserComments, getUserComments} from "../utils/requestHelper"
+import {getPaginatedUserComments} from "../utils/requestHelper"
 import UserCommentItem from "@/components/UserCommentItem";
 import { Button } from "@/components/ui/button";
 
@@ -7,7 +7,6 @@ const UserComments = () => {
 
     const [comments, setComments] = useState<UserComment[]>([]);
     const [buttonActive, setButtonActive] = useState<boolean>(true);
-    const [pageNo, setPageNo] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(0);
 
     const loadMore = () => {

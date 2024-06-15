@@ -10,17 +10,19 @@ import {
     DialogTrigger,
 } from "../components/ui/Dialog"
 import { DialogClose } from "@radix-ui/react-dialog";
-import { isFeedVaild } from "@/utils/requestHelper";
-
+import { addTheFeedFr, isFeedVaild } from "@/utils/requestHelper";
+import { useState } from "react";
 
 const MyFeeds = () => {
 
-    const addFeed = (url:string) => {
-        isFeedVaild(url).then((r) => {
+    const [inputVal, setInputVal] = useState<string>("");
+
+    const addFeed = () => {
+        isFeedVaild(inputVal).then((r) => {
             if (r) {
-                
+                addTheFeedFr(inputVal);
             } else {
-                alert("OIDA DES WÜ MIR NID EINI");
+                alert("This feed is invalid");
             }
         });
     }
@@ -37,10 +39,9 @@ const MyFeeds = () => {
                         <DialogTitle>Add a new feed</DialogTitle>
                         <DialogDescription>You can add a feed to your personal feed list.</DialogDescription>
                     </DialogHeader>
-                    <div>
-                        <input type="text" placeholder="http://feedurl.com/rssfeed"></input>
-                        <br/>
-                        <Button>Add</Button>
+                    <div className="flex justify-between">
+                        <input className="min-w-80" type="text" onChange={e => setInputVal(e.target.value)} placeholder="http://feedurl.com/rssfeed"></input>
+                        <Button className="order-last" onClick={addFeed}>Add</Button>
                     </div>
 
                     <DialogClose>
