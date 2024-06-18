@@ -20,7 +20,7 @@ export const fetchBackendFeeds = async () => {
 
     const userFeeds = await fetchUserFeeds();
         
-    const requestUrl = beUrl.concat(`/feed-list?urls=${userFeeds?.join(",")}`);
+    const requestUrl = beUrl.concat(`/feed-list?urls=${encodeURIComponent(userFeeds?.join(","))}`);
 
     const {data, status} = await axios.get<RssChannel[]>(requestUrl);
 
@@ -36,7 +36,7 @@ export const fetchUserArticles = async ():Promise<RssItem[]> => {
 }
 
 export const fetchUserArticlesByUrls = async (urls: string[]):Promise<RssItem[]> => {
-    const requestUrl = beUrl.concat(`/item-list?urls=${urls.join(',')}`);
+    const requestUrl = beUrl.concat(`/item-list?urls=${encodeURIComponent(urls.join(','))}`);
 
     const {data, status} = await axios.get<RssItem[]>(requestUrl);
 
@@ -53,7 +53,7 @@ export const fetchPaginatedArticles = async (pageNo: number, pageSize: number) =
 }
 
 export const fetchPaginatedArticlesByUrl = async (urls: string[], pageNo: number, pageSize: number) => {
-    const requestUrl = beUrl.concat(`/item-list/pages?pageSize=${pageSize}&pageNo=${pageNo}&urls=${urls.join(",")}&asc=false`)
+    const requestUrl = beUrl.concat(`/item-list/pages?pageSize=${encodeURIComponent(pageSize)}&pageNo=${encodeURIComponent(pageNo)}&urls=${encodeURIComponent(urls.join(","))}&asc=false`)
     const {data, status} = await axios.get<ItemPageable>(requestUrl);
 
     if (status != 200) console.log("########################## ERRROR fetching paginated articles")
@@ -71,7 +71,7 @@ export const postUserComment = async (title: string, link: string, description: 
 }
 
 export const getUserComments = async (after: string) => {
-    const {data, status} = await axios.get<UserComment[]>(`${beUrl}/comments/${after}`);
+    const {data, status} = await axios.get<UserComment[]>(`${beUrl}/comments/${encodeURIComponent(after)}`);
 
     if (status != 200) console.log("###################### ERROR")
 
@@ -79,31 +79,44 @@ export const getUserComments = async (after: string) => {
 }
 
 export const getPaginatedUserComments = async (pageNo: number) => {
-    const {data, status} = await axios.get<UserCommentPageable>(`${beUrl}/comments/pages?pageSize=3&pageNo=${pageNo}`);
+    const {data, status} = await axios.get<UserCommentPageable>(`${beUrl}/comments/pages?pageSize=3&pageNo=${encodeURIComponent(pageNo)}`);
 
     if (status != 200) console.log("###################### ERROR")
 
     return data
 }
 
-export const isFeedVaild = async (url: string):Promise<boolean> => {
-    axios.post(`${beUrl}/feed-list?url=${url}`, {
-    }).then(() => {
-        return true
-    })
-    .catch(() => {
-        return false
+export const isFeedVaild = async (url: string)  => {
+    const {status} = await axios.post(`${beUrl}/feed-list?url=${encodeURIComponent(url)}`).catch(e => {
+        throw new Error("Invalid feed url!");
     })
 
-    return false
+    const userFeeds = await fetchUserFeeds(); 
+    if (userFeeds.find(e => e === url)) throw new Error("You already added this feed to your personal feed list!");
 }
 
 export const addTheFeedFr = async (url:string) => {
+    const user = await supabase.auth.getUser();
+    const userId = user.data.user?.id;
+    
     const {error} = await supabase
         .from("user_feeds")
-        .insert({feedUrl: url})
+        .upsert({user_id: userId, feedUrl: url})
 
-    if (error) alert("OIDA ERROR NA: " + error.message)
+    if (error) throw new Error(error.message);
+}
+
+export const removeTheFeed = async (url:string) => {
+    const user = await supabase.auth.getUser();
+    const userId = user.data.user?.id;
+
+    const {error} = await supabase
+        .from("user_feeds")
+        .delete()
+        .eq('user_id', `${userId}`)
+        .eq('feedUrl', url);
+
+    if (error) throw new Error(error.message);
 }
 
 export const getItemById = async (item_id: number) => {

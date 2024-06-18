@@ -12,18 +12,34 @@ import {
 import { DialogClose } from "@radix-ui/react-dialog";
 import { addTheFeedFr, isFeedVaild } from "@/utils/requestHelper";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const MyFeeds = () => {
+
+    const {toast} = useToast();
 
     const [inputVal, setInputVal] = useState<string>("");
 
     const addFeed = () => {
-        isFeedVaild(inputVal).then((r) => {
-            if (r) {
-                addTheFeedFr(inputVal);
-            } else {
-                alert("This feed is invalid");
-            }
+        isFeedVaild(inputVal).then(() => {
+                addTheFeedFr(inputVal).then(() => {
+                    toast({
+                        title: "You're good to go!",
+                        description: "The feed was added to your own personal list of feeds successfully.",
+                        type: "foreground", 
+                    })
+                }).catch((e:Error) => {
+                    toast({
+                        title: e.name,
+                        description: `${e.message}`,
+                    }) 
+                });
+        }).catch((e:Error) => {
+            toast({
+                title: e.name, 
+                description: e.message
+            })
         });
     }
 
@@ -57,6 +73,7 @@ const MyFeeds = () => {
             <div>
                 <FeedList />
             </div>
+            <Toaster/>
         </div>
     );
 };
