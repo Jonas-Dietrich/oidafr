@@ -7,6 +7,7 @@ export const fetchUserFeeds = async ():Promise<string[]> => {
     const { data: user_feeds, error } = await supabase
         .from('user_feeds')
         .select('feedUrl')
+        .is('invalid_since', null)
 
     console.log(user_feeds);
 
@@ -107,14 +108,10 @@ export const addTheFeedFr = async (url:string) => {
 }
 
 export const removeTheFeed = async (url:string) => {
-    const user = await supabase.auth.getUser();
-    const userId = user.data.user?.id;
-
-    const {error} = await supabase
-        .from("user_feeds")
-        .delete()
-        .eq('user_id', `${userId}`)
-        .eq('feedUrl', url);
+    const { error } = await supabase
+        .from('user_feeds')
+        .update({invalid_since: ((new Date()).toISOString())})
+        .eq("feedUrl", url);
 
     if (error) throw new Error(error.message);
 }

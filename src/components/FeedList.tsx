@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import "../types/rssDatatypes.d.ts";
 import FeedListItem from "./FeedListItem";
-import { fetchBackendFeeds } from "@/utils/requestHelper.ts";
+import { fetchBackendFeeds, removeTheFeed } from "@/utils/requestHelper.ts";
 
 const FeedList = () => {
 
@@ -11,11 +11,20 @@ const FeedList = () => {
         fetchBackendFeeds().then(setFeedCus) 
     }, []);
 
+    const removeFeed = (url:string) => {
+        removeTheFeed(url);
+
+        const rmvidx = feedCus.findIndex(e => e.feedUrl === url);
+        feedCus.splice(rmvidx, 1);
+
+        setFeedCus([...feedCus]);
+    }
+
     return (
         <div>
             <div className="flex flex-col">
                 {
-                    feedCus.map((feed) => <FeedListItem key={feed.channel_id} feed={feed}/>)  
+                    feedCus.map((feed) => <FeedListItem key={feed.channel_id} feed={feed} removeFeed={removeFeed}/>)  
                 }
             </div>
         </div>
