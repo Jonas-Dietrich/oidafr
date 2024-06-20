@@ -1,23 +1,43 @@
+import { useEffect, useState } from "react";
 import RssItemItem from "./RssItemItem";
 import { Button } from "./ui/button";
+import { fetchPaginatedArticles, fetchPaginatedArticlesByUrl} from "@/utils/requestHelper";
 
 interface ArticleListProps {
-    articles: RssItem[], 
-    loadMore: () => void
+    articleUrls: string[], 
 }
 
-const ArticleList:React.FC<ArticleListProps> = ({articles, loadMore}) => {
+const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
 
+    const [articles, setArticles] = useState<RssItem[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(0);
+    const [buttonActive, setButtonActive] = useState<boolean>(true);
+
+    useEffect(() => {
+        fetchPaginatedArticlesByUrl(articleUrls, currentPage, 20).then((data:ItemPageable) => setArticles(data.content));
+    }, []);
+
+    const loadMore = () => {
+        setCurrentPage(currentPage + 1);
+
+        fetchPaginatedArticles(currentPage, 20).then((data:ItemPageable) => {
+            setArticles([...articles, ...data.content]);
+
+            if (currentPage + 1 >= data.pageable.totalPages) setButtonActive(false);
+        })
+    }
+    
 
     return (<div>
-        <h1>Amazing List of RSS items!</h1>
-
         {
             articles.map((item: RssItem) =>
-                <RssItemItem item={item}/>
+                <RssItemItem item={item} key={item.item_id}/>
             )
         }
-        <Button variant="outline" onClick={loadMore}>Load More</Button>
+
+        <div className="flex flex-col items-center justify-center">
+            { buttonActive ? <Button variant="default" onClick={loadMore}>Load More</Button> : <></> }
+        </div>
     </div>);
 }
  

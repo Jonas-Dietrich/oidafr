@@ -76,6 +76,24 @@ interface ItemPageable {
         pageNumber: number, 
         pageSize: number,
         totalPages: number, 
-        
+    }
+}
+
+interface UserComment {
+    itemId: number, 
+    title: string,
+    link: string, 
+    description: string, 
+    rssChannel: RssChannel, 
+    pubDate: Date,
+    author: string
+}
+
+interface UserCommentPageable {
+    content: UserComment[],
+    pageable: {
+        pageNumber: number, 
+        pageSize: number,
+        totalPages: number, 
     }
 }

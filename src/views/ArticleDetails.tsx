@@ -48,7 +48,7 @@ const ArticleDetails = () => {
         <div className={"p-10"}>
             {item && <ArticleDetailsCard rssItem={item} isChannelTrustWorthy={item.rssChannel.feedUrl !== beUrl}/>}
             {item && <RssItemItem item={item}></RssItemItem>}
-            {item && <FeedListItem feed={item.rssChannel}/>}
+            {item && <FeedListItem feed={item.rssChannel} removeFeed={undefined}/>}
             {httpStatus === 404 && <NotFoundPage errorText={"Oops! The article you are looking for does not exist."}/>}
         </div>
     );
