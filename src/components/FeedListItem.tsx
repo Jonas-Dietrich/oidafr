@@ -11,11 +11,11 @@ const FeedListItem: React.FC<FeedListItemProps> = ({ feed, removeFeed }) => {
             {feed.rssImage == null ? <img src="https://cdn4.iconfinder.com/data/icons/picture-sharing-sites/32/No_Image-1024.png" className="max-h-20" ></img> : <img src={feed.rssImage.url} width={feed.rssImage.width} height={feed.rssImage.height} className="rounded"></img>}
         </div>
         <div className="flex justify-between w-full">
-            <div className="inline-block align-middle">
+            <div >
                 <a className="text-xl font-semibold" href={feed.link}>{feed.title}</a>
                 <p className="text-lg">{!feed.description ? "Der Name ist hier Programm!" : feed.description}</p>
             </div>
-            <Button className="order-last align-middle" onClick={() => removeFeed(feed.feedUrl)}>Remove</Button>
+            <Button className="order-last inline-block align-middle" onClick={() => removeFeed(feed.feedUrl)}>Remove</Button>
         </div>
     </div>);
 }
