@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 interface FeedListItemProps {
     feed: RssChannel,
-    removeFeed: (url: string) => void,
+    removeFeed: ((url: string) => void) | undefined,
 }
 
 const FeedListItem: React.FC<FeedListItemProps> = ({ feed, removeFeed }) => {
@@ -15,7 +15,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({ feed, removeFeed }) => {
                 <a className="text-xl font-semibold" href={feed.link}>{feed.title}</a>
                 <p className="text-lg">{!feed.description ? "Der Name ist hier Programm!" : feed.description}</p>
             </div>
-            <Button className="order-last inline-block align-middle" onClick={() => removeFeed(feed.feedUrl)}>Remove</Button>
+            { removeFeed && <Button className="order-last inline-block align-middle" onClick={() => removeFeed(feed.feedUrl)}>Remove</Button>}
         </div>
     </div>);
 }

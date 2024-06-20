@@ -88,9 +88,10 @@ export const getPaginatedUserComments = async (pageNo: number) => {
 }
 
 export const isFeedVaild = async (url: string)  => {
-    const {status} = await axios.post(`${beUrl}/feed-list?url=${encodeURIComponent(url)}`).catch(e => {
+    const {status} = await axios.post(`${beUrl}/feed-list?url=${encodeURIComponent(url)}`).catch(() => {
         throw new Error("Invalid feed url!");
     })
+    if (status != 200) console.log("### something's wrong tonight, I can feel ist...")
 
     const userFeeds = await fetchUserFeeds(); 
     if (userFeeds.find(e => e === url)) throw new Error("You already added this feed to your personal feed list!");

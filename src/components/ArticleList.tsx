@@ -35,8 +35,7 @@ const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
             )
         }
 
-
-        <div>
+        <div className="flex flex-col items-center justify-center">
             { buttonActive ? <Button variant="default" onClick={loadMore}>Load More</Button> : <></> }
         </div>
     </div>);

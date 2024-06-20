@@ -30,7 +30,7 @@ const UserComments = () => {
 
     return (<div>
         {comments.map(c => <UserCommentItem comment={c}/>)} 
-        {buttonActive ? <Button onClick={loadMore}>Load more</Button> : <></>}
+        {buttonActive ? <div className="flex flex-col items-center justify-center"><Button onClick={loadMore}>Load more</Button> </div>: <></>}
     </div>);
 }
  
