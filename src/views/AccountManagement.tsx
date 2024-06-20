@@ -1,6 +1,11 @@
 import PasswordChange from "../components/PasswordChange.tsx";
 import rssImage from "@/assets/rssAccount.webp";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 03.05.24
+ */
 const AccountManagement = () => {
     return (
         <div className={`flex flex-col items-center justify-center mt-5 text-gray-900`}>

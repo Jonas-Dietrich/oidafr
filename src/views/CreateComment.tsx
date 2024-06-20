@@ -3,6 +3,11 @@ import {useToast} from "@/components/ui/use-toast"
 import {postUserComment} from "@/utils/requestHelper.ts";
 import rssImage from "@/assets/rssCommentCollector.webp";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 24.05.24
+ */
 const CreateComment = () => {
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');

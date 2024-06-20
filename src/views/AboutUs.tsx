@@ -6,6 +6,11 @@ import {fetchAboutStats} from "@/utils/requestHelper.ts";
 import {toast} from "@/components/ui/use-toast.ts";
 import Loading from "@/components/Loading.tsx";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 24.05.24
+ */
 const AboutUs = () => {
     const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
     const [stats, setStats] = useState<IApiAboutStats | null>(null);

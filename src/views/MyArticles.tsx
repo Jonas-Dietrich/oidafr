@@ -4,6 +4,11 @@ import rssArticleLibrarian from "../assets/rssArticleLibrarian.webp"
 import ArticleList from "@/components/ArticleList";
 import { fetchUserFeeds } from "@/utils/requestHelper";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 16.05.24
+ */
 const MyArticles = () => {
 
     const [articleUrls, setArticleUrls] = useState<string[]>([]);;

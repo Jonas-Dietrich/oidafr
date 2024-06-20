@@ -3,6 +3,11 @@ import {getPaginatedUserComments} from "../utils/requestHelper"
 import UserCommentItem from "@/components/UserCommentItem";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 13.06.24
+ */
 const UserComments = () => {
 
     const [comments, setComments] = useState<UserComment[]>([]);

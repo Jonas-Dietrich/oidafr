@@ -8,6 +8,11 @@ interface LoginProps {
     session: object | null
 }
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 25.05.24
+ */
 const Login:React.FC<LoginProps> = ({session}) => {
     const nav = useNavigate();
 

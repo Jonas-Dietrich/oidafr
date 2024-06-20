@@ -10,6 +10,11 @@ import {parseRssItem} from "@/utils/jsonHelper.ts";
 
 const beUrl = import.meta.env.VITE_BACKEND_URL as string;
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 24.05.24
+ */
 const ArticleDetails = () => {
     const {item_id} = useParams();
     const [item, setItem] = useState<RssItem | null>(null);

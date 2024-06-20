@@ -15,6 +15,11 @@ interface TopChannelsProps {
     session?: object | null;
 }
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 14.06.24
+ */
 const TopChannels: React.FC<TopChannelsProps> = ({session}) => {
     const [topChannels, setTopChannels] = useState<ITopChannel[] | null>(null);
     const [beError, setBeError] = useState<CustomError | null>(null);

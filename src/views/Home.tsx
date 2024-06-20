@@ -6,6 +6,11 @@ interface HomeProps {
     session: object | null
 }
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 03.05.24
+ */
 const Home: React.FC<HomeProps> = ({session}) => {
     const [userName, setUserName] = useState<string | null>(null);
 

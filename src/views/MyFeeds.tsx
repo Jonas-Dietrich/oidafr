@@ -15,6 +15,11 @@ import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 03.05.24
+ */
 const MyFeeds = () => {
 
     const { toast } = useToast();

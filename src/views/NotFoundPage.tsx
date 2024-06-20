@@ -10,6 +10,11 @@ interface NotFoundPageProps {
     errEasterEggLink?: string
 }
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 24.05.24
+ */
 const NotFoundPage: React.FC<NotFoundPageProps> = (
     {
         errorText = "Oops! The page you are looking for does not exist.",

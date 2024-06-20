@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 15.06.24
+ */
 const ChannelDetails = () => {
 
     const { channel_id } = useParams();

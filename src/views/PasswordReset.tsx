@@ -3,6 +3,11 @@ import supabase from '../utils/supabase.tsx';
 import {Session} from "@supabase/supabase-js";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 03.05.24
+ */
 const ResetPassword = () => {
     const [ session, setSession] = useState<Session>();
     const nav = useNavigate();
