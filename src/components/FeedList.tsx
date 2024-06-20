@@ -24,7 +24,7 @@ const FeedList = () => {
         <div>
             <div className="flex flex-col">
                 {
-                    feedCus.map((feed) => <FeedListItem key={feed.channel_id} feed={feed} removeFeed={removeFeed}/>)  
+                    feedCus.map((feed, idx) => <FeedListItem key={idx} feed={feed} removeFeed={removeFeed}/>)  
                 }
             </div>
         </div>

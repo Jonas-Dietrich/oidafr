@@ -30,8 +30,8 @@ const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
 
     return (<div>
         {
-            articles.map((item: RssItem) =>
-                <RssItemItem item={item} key={item.item_id}/>
+            articles.map((item: RssItem, idx) =>
+                <RssItemItem item={item} key={idx}/>
             )
         }
 
