@@ -5,6 +5,10 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/** 
+  Vorgefertigter Component von https://ui.shadcn.com/
+*/ 
+
 const ToastProvider = ToastPrimitives.Provider
 
 const ToastViewport = React.forwardRef<

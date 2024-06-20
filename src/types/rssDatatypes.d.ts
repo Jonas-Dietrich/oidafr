@@ -1,10 +1,15 @@
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 17. 5. 2024
+ */
+
 interface RssChannel {
     feedUrl: string, 
     channel_id: number, 
     title: string, 
     link: string, 
     description: string, 
-//  lastBuildDate: TO FIGURE OUT LATER
     rssImage: RssImage, 
     rssItems: RssItem[], 
     category: RssCategory,

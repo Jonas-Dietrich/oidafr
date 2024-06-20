@@ -3,6 +3,13 @@ import RssItemItem from "./RssItemItem";
 import { Button } from "./ui/button";
 import { fetchPaginatedArticles, fetchPaginatedArticlesByUrl} from "@/utils/requestHelper";
 
+
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 23. 5. 2024
+ */
+
 interface ArticleListProps {
     articleUrls: string[], 
 }

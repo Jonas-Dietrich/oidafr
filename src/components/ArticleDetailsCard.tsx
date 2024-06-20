@@ -16,6 +16,12 @@ import {
 
 import rssImage from '../assets/rssWarning.webp';
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 24. 5. 2024
+ */
+
 interface ArticleDetailsCardProps {
     rssItem: RssItem,
     isChannelTrustWorthy?: boolean

@@ -1,5 +1,11 @@
 import { Button } from "./ui/button";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 17. 5. 2024
+ */
+
 interface FeedListItemProps {
     feed: RssChannel,
     removeFeed: ((url: string) => void) | undefined,

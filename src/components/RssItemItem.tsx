@@ -1,5 +1,11 @@
 import {shorten} from "../utils/generalHelper"
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 17. 5. 2024
+ */
+
 interface RssItemItemProps {
     item: RssItem
 }

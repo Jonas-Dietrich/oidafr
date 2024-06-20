@@ -3,6 +3,12 @@ import "../types/rssDatatypes.d.ts";
 import FeedListItem from "./FeedListItem";
 import { fetchBackendFeeds, removeTheFeed } from "@/utils/requestHelper.ts";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 3. 5. 2024
+ */
+
 const FeedList = () => {
 
     const [feedCus, setFeedCus] = useState<RssChannel[]>([]);

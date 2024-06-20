@@ -6,6 +6,10 @@ import { Cross2Icon } from "@radix-ui/react-icons"
 
 import { cn } from "@/lib/utils"
 
+/** 
+  Vorgefertigter Component von https://ui.shadcn.com/
+*/ 
+
 const Dialog = DialogPrimitive.Root
 
 const DialogTrigger = DialogPrimitive.Trigger

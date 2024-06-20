@@ -2,6 +2,12 @@ import {useEffect, useState} from 'react';
 import supabase from '../../src/utils/supabase.tsx';
 import {Session} from "@supabase/supabase-js";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 3. 5. 2024
+ */
+
 const PasswordChange = () => {
     const [ session, setSession] = useState<Session>();
 
