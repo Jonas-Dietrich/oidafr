@@ -18,6 +18,11 @@ import TopChannels from "@/views/TopChannels.tsx";
 import UserComments from './views/UserComments.tsx';
 import ChannelDetails from './views/ChannelDetails.tsx';
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 12.04.24
+ */
 function App() {
     const [session, setSession] = useState<object | null>(null)
 

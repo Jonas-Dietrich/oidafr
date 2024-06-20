@@ -1,6 +1,12 @@
 import supabase from "./supabase";
 import axios from "axios";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 23.05.24
+ */
+
 const beUrl = import.meta.env.VITE_BACKEND_URL as string;
 
 export const fetchUserFeeds = async ():Promise<string[]> => {
