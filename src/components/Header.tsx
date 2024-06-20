@@ -4,6 +4,12 @@ import rssImage from '../assets/rssFaviconLogo.webp';
 import supabase from "@/utils/supabase.tsx";
 import { useToast } from "@/components/ui/use-toast.ts";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 23. 5. 2024
+ */
+
 interface HeaderProps {
     session?: object | null
 }

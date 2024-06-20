@@ -18,6 +18,12 @@ import rssImage from '../assets/rssWarning.webp';
 import {useLocation} from "react-router-dom";
 import {ClipboardCheck, ClipboardCopy} from "lucide-react";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 24. 5. 2024
+ */
+
 interface ArticleDetailsCardProps {
     rssItem: RssItem,
     isChannelTrustWorthy?: boolean

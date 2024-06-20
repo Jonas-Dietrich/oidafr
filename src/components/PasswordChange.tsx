@@ -4,6 +4,12 @@ import {Session} from "@supabase/supabase-js";
 import {useNavigate} from "react-router-dom";
 import {useToast} from "@/components/ui/use-toast.ts";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 3. 5. 2024
+ */
+
 const PasswordChange = () => {
     const [ session, setSession] = useState<Session>();
 

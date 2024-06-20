@@ -1,5 +1,11 @@
 import { shorten } from "@/utils/generalHelper";
 
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 13. 6. 2024
+ */
+
 interface UserCommentItemProps {
     comment: UserComment
 }

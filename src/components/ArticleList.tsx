@@ -3,6 +3,13 @@ import RssItemItem from "./RssItemItem";
 import { Button } from "./ui/button";
 import { fetchPaginatedArticles, fetchPaginatedArticlesByUrl} from "@/utils/requestHelper";
 
+
+/**
+ * Project: RssFrontend
+ * Created by: diejoc20
+ * Date: 23. 5. 2024
+ */
+
 interface ArticleListProps {
     articleUrls: string[], 
 }
@@ -30,8 +37,8 @@ const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
 
     return (<div>
         {
-            articles.map((item: RssItem) =>
-                <RssItemItem item={item} key={item.itemId}/>
+            articles.map((item: RssItem, idx) =>
+                <RssItemItem item={item} key={idx}/>
             )
         }
 

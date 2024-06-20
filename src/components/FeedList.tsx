@@ -3,6 +3,12 @@ import "../types/rssDatatypes.d.ts";
 import FeedListItem from "./FeedListItem";
 import { fetchBackendFeeds, removeTheFeed } from "@/utils/requestHelper.ts";
 
+/**
+ * Project: RssFrontend
+ * Created by: eibmac20
+ * Date: 3. 5. 2024
+ */
+
 const FeedList = () => {
 
     const [feedCus, setFeedCus] = useState<RssChannel[]>([]);
@@ -24,7 +30,7 @@ const FeedList = () => {
         <div>
             <div className="flex flex-col">
                 {
-                    feedCus.map((feed) => <FeedListItem key={feed.channel_id} feed={feed} removeFeed={removeFeed}/>)  
+                    feedCus.map((feed, idx) => <FeedListItem key={idx} feed={feed} removeFeed={removeFeed}/>)  
                 }
             </div>
         </div>
