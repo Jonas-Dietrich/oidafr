@@ -11,7 +11,7 @@ import { fetchUserFeeds } from "@/utils/requestHelper";
  */
 const MyArticles = () => {
 
-    const [articleUrls, setArticleUrls] = useState<string[]>([]);;
+    const [articleUrls, setArticleUrls] = useState<string[]>([]);
 
     useEffect(() => {
         fetchUserFeeds().then(setArticleUrls);
