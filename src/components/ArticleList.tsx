@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import RssItemItem from "./RssItemItem";
 import { Button } from "./ui/button";
-import { fetchPaginatedArticles, fetchPaginatedArticlesByUrl} from "@/utils/requestHelper";
+import { fetchPaginatedArticles, } from "@/utils/requestHelper";
+import Loading from "@/components/Loading.tsx";
 
 
 /**
@@ -10,27 +11,29 @@ import { fetchPaginatedArticles, fetchPaginatedArticlesByUrl} from "@/utils/requ
  * Date: 23. 5. 2024
  */
 
-interface ArticleListProps {
-    articleUrls: string[], 
-}
 
-const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
+const ArticleList = () => {
 
     const [articles, setArticles] = useState<RssItem[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [buttonActive, setButtonActive] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        fetchPaginatedArticlesByUrl(articleUrls, currentPage, 20).then((data:ItemPageable) => setArticles(data.content));
+        fetchPaginatedArticles(currentPage, 20).then((data:ItemPageable) => setArticles(data.content));
     }, []);
 
     const loadMore = () => {
+        console.log(isLoading);
         setCurrentPage(currentPage + 1);
 
         fetchPaginatedArticles(currentPage, 20).then((data:ItemPageable) => {
             setArticles([...articles, ...data.content]);
 
             if (currentPage + 1 >= data.pageable.totalPages) setButtonActive(false);
+            setIsLoading(false);
+        }).catch(() => {
+            setIsLoading(false);
         })
     }
     
@@ -42,8 +45,9 @@ const ArticleList:React.FC<ArticleListProps> = ({articleUrls}) => {
             )
         }
 
-        <div className="flex flex-col items-center justify-center">
-            { buttonActive ? <Button variant="default" onClick={loadMore}>Load More</Button> : <></> }
+        <div className="flex flex-col items-center justify-center mb-4">
+            {isLoading ? <div className="m-5"><Loading/></div> : <></>}
+            { buttonActive ? <Button variant="default" onClick={() => {loadMore(); setIsLoading(true)}}>Load More</Button> : <></> }
         </div>
     </div>);
 }
